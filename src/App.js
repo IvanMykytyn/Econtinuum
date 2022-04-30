@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import {Route, Routes} from "react-router-dom";
 import './App.css';
+
+import Homepage from "./pages/Homepage/Homepage";
+import SignIn from "./pages/SIgnIn/SignIn";
+import SignUp from "./pages/SignUp/SignUp";
+import Profile from "./pages/Profile/Profile";
+import Activities from "./pages/Activities/Activities";
+import Tutorial from "./pages/Tutorial/Tutorial";
+import Rating from "./pages/Rating/Rating";
+import FormPage from "./pages/FormPage/FormPage";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Homepage/>}/>
+        <Route path="sign-in" element={<SignIn/>}/>
+        <Route path="sign-up" element={<SignUp/>}/>
+        <Route path="profile" element={<Profile/>}/>
+        <Route path="activities" element={<Activities/>}/>
+        <Route path="tutorial" element={<Tutorial/>}/>
+        <Route path="rating" element={<Rating/>}/>
+        <Route path="form" element={<FormPage/>}/>
+        <Route path="*" element={<ErrorPage/>}/>
+      </Routes>
     </div>
   );
 }
