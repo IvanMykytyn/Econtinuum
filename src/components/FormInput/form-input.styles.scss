@@ -1,0 +1,21 @@
+
+
+.form-input{
+  width: 100%;
+  height: 40px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  padding: 14px  11px;
+  margin-bottom: 10px;
+  border: 1px solid #E5E5E5;
+  box-sizing: border-box;
+  border-radius: 7px;
+}
+
+.form-input + .form-input{
+  margin-left: 12px;
+}

@@ -1,0 +1,36 @@
+.custom-button{
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
+
+  outline: none;
+  border: 0;
+
+  width: 100%;
+  height: 45px;
+  background: #6EB29A;
+  border-radius: 12px;
+}
+.google-button{
+  background: #FFFFFF;
+  border: 1px solid #8F8C9C;
+  box-sizing: border-box;
+  border-radius: 15px;
+  padding: 0 17px;
+
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #8F8C9C;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .google-logo{
+    width: 17px;
+    height: 17px;
+  }
+}
