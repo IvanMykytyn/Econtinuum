@@ -1,0 +1,30 @@
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #689CD2;
+    color: #fff;
+    font-family: Slabo;
+}
+.header_section{
+    display: flex;
+    align-items: center;
+}
+.header_item{
+    pad: 10px 15px;
+    font-size: 20px;
+    margin-left: 5px;
+}
+.header_item:hover{
+    background-color: #FF9900;
+    border-radius: 4px;
+}
+.headerLogo{
+    font-weight: bold;
+    align-items: left;
+}
