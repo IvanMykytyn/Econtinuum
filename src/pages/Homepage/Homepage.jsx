@@ -6,21 +6,23 @@ const Homepage = () => {
 
     return (
         <>
-        <div className="header">
-            <div className="header_section">
-                <div className="header_item headerLogo">
-                    Eco project
+        <header class="header">
+            <div class="container">
+                <div class="headerLogo">
+                    <a href="#"><img class="headerLogoPicture" src="Logo.svg"></img></a>
+                    <a href="#" class="header_logo_text"><b >ECO</b>ntinuum</a>
                 </div>
-                <div className="header_section">
-                    <div className="header_item headerButton"><a href="#"> Tutorial </a></div>
-                    <div className="header_item headerButton"><a href="#"> Select activities </a></div>
-                    <div className="header_item headerButton"><a href="#"> Rating </a></div>
+                <div class="headerButtons">   
+                    <div class="headerButton"><a href="#" c> Tutorial </a></div>
+                    <div class="headerButton"><a href="#" class="middleButton"> Select activities </a></div>
+                    <div class="headerButton"><a href="#"> Rating </a></div>
+                </div>
+                <div class="headerSignUpButton">
+                    <a href="#" class="signUpText"> Sing up </a>
+                    <a href="#"><img class="signUpPicture" src="Profile.svg"></img></a>
                 </div>
             </div>
-            <div className="header_section">
-                <div className="header_item headerButton"><a href="#"> Sing up </a></div>
-            </div>
-        </div>
+        </header>
         </>
     )
 }
