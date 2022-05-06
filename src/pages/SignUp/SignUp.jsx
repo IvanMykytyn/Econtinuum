@@ -21,6 +21,7 @@ const SignUp = ({signUpRequest}) => {
         confirmPassword: '',
     })
     const [errors, setErrors] = useState({})
+
     const handleChange = event => {
         const {name, value} = event.target
         setUser({...user, [name]: value})
@@ -28,10 +29,20 @@ const SignUp = ({signUpRequest}) => {
 
     const handleSubmit = async event => {
         event.preventDefault()
-        const {errors,isValid} = validateInput(user)
-        if(isValid){
-            await signUpRequest(user).then(
-                () => {},
+        const {errors, isValid} = validateInput(user)
+        if (isValid) {
+            const send_user = {
+                first_name: user.first_name,
+                last_name: user.last_name,
+                date_of_birth: `${user.year}-${user.month}-${user.day}`,
+                email: user.email,
+                password: user.password.toString(),
+            }
+            console.log(typeof send_user.password)
+            await signUpRequest(send_user).then(
+                data => {
+                    localStorage.setItem('token', JSON.parse(data).token)
+                },
                 data => setErrors(data))
         }
         setErrors(errors)
