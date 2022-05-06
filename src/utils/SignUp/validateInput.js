@@ -5,9 +5,13 @@ export const validateInput = data => {
 
     if (Validator.isEmpty(data.first_name.trim())) {
         errors.first_name = 'First name is required'
+    }else if (/\s/.test(data.first_name)){
+        errors.first_name = 'First name is invalid'
     }
     if (Validator.isEmpty(data.last_name.trim())) {
         errors.last_name = 'Last name is required'
+    }else if(/\s/.test(data.last_name)){
+        errors.last_name = 'Last name is invalid'
     }
     if (Validator.isEmpty(data.email.trim())) {
         errors.email = 'Email is required'

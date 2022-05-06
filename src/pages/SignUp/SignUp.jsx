@@ -9,7 +9,7 @@ import {userSignUpRequest} from "../../redux/auth/auth.actions";
 import {connect} from "react-redux";
 import {validateInput} from "../../utils/SignUp/validateInput";
 
-const SignUp = ({signUpRequest}) => {
+const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) => {
     const [user, setUser] = useState({
         first_name: '',
         last_name: '',
@@ -27,10 +27,18 @@ const SignUp = ({signUpRequest}) => {
         setUser({...user, [name]: value})
     }
 
-    const handleSubmit = async event => {
-        event.preventDefault()
+    const isValid = () => {
         const {errors, isValid} = validateInput(user)
-        if (isValid) {
+        if (!isValid) {
+            setErrors(errors)
+        }
+        return isValid
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+
+        if (isValid()) {
             const send_user = {
                 first_name: user.first_name,
                 last_name: user.last_name,
@@ -38,14 +46,24 @@ const SignUp = ({signUpRequest}) => {
                 email: user.email,
                 password: user.password.toString(),
             }
-            console.log(typeof send_user.password)
-            await signUpRequest(send_user).then(
-                data => {
-                    localStorage.setItem('token', JSON.parse(data).token)
-                },
-                data => setErrors(data))
+            const result = signUpRequest(send_user)
+            if (!result) {
+                console.log(errorMessage)
+                return
+            }
+            localStorage.setItem('user', JSON.stringify(userObject))
+            setUser({
+                first_name: '',
+                last_name: '',
+                email: '',
+                day: '',
+                month: '',
+                year: '',
+                password: '',
+                confirmPassword: '',
+            })
+            setErrors({})
         }
-        setErrors(errors)
     }
     return (
         <div className='container'>
@@ -123,7 +141,7 @@ const SignUp = ({signUpRequest}) => {
                         />
                     </div>
                     <div className={'signup-form__buttons signup-form__flex'}>
-                        <CustomButton type='submit'>Sign up</CustomButton>
+                        <CustomButton disabled={isLoading} type='submit'>Sign up</CustomButton>
                         <div className='signup-form__text'>or</div>
                         <CustomButton googleButton>Sign up with Google</CustomButton>
                     </div>
@@ -139,5 +157,8 @@ const SignUp = ({signUpRequest}) => {
 const mapDispatchToProps = dispatch => ({
     signUpRequest: user => dispatch(userSignUpRequest(user))
 })
+const mapStateToProps = state => ({
+    auth: state.auth
+})
 
-export default connect(null, mapDispatchToProps)(SignUp)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
