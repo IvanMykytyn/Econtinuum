@@ -1,16 +1,18 @@
 import React, {useState} from "react";
 
 import {Link} from "react-router-dom";
-
 import './sign-up.styles.scss'
 import FormInput from "../../components/FormInput/FormInput";
 import Password from "../../components/Password/Password";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import {userSignUpRequest} from "../../redux/auth/auth.actions";
+import {connect} from "react-redux";
+import {validateInput} from "../../utils/SignUp/validateInput";
 
-const SignUp = () => {
+const SignUp = ({signUpRequest}) => {
     const [user, setUser] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         day: '',
         month: '',
@@ -18,40 +20,53 @@ const SignUp = () => {
         password: '',
         confirmPassword: '',
     })
+    const [errors, setErrors] = useState({})
     const handleChange = event => {
         const {name, value} = event.target
         setUser({...user, [name]: value})
     }
 
+    const handleSubmit = async event => {
+        event.preventDefault()
+        const {errors,isValid} = validateInput(user)
+        if(isValid){
+            await signUpRequest(user).then(
+                () => {},
+                data => setErrors(data))
+        }
+        setErrors(errors)
+    }
     return (
         <div className='container'>
             <div className='signup'>
                 <h2 className='signup__title'>Sign up</h2>
                 <span className='signup__subtitle'>Create your own story</span>
-                <form className='signup-form'>
+                <form className='signup-form' onSubmit={handleSubmit}>
                     <div className='signup-form__flex'>
                         <FormInput
                             type='text'
-                            name={'firstName'}
-                            value={user.firstName}
+                            name={'first_name'}
+                            value={user.first_name}
                             onChange={handleChange}
                             label={'First name'}
-                            required/>
+                            error={errors.first_name}
+                        />
                         <FormInput
                             type='text'
-                            name={'lastName'}
-                            value={user.lastName}
+                            name={'last_name'}
+                            value={user.last_name}
                             onChange={handleChange}
                             label={'Last name'}
-                            required/>
+                            error={errors.last_name}
+                        />
                     </div>
                     <FormInput
-                        type='email'
+                        type='text'
                         name={'email'}
                         value={user.email}
                         onChange={handleChange}
                         label={'Email address'}
-                        required
+                        error={errors.email}
                     />
                     <div className='signup-form__flex'>
                         <FormInput
@@ -60,21 +75,24 @@ const SignUp = () => {
                             value={user.day}
                             onChange={handleChange}
                             label={'Day'}
-                            required/>
+                            error={errors.day}
+                        />
                         <FormInput
                             type='number'
                             name={'month'}
                             value={user.month}
                             onChange={handleChange}
                             label={'Month'}
-                            required/>
+                            error={errors.month}
+                        />
                         <FormInput
                             type='number'
                             name={'year'}
                             value={user.year}
                             onChange={handleChange}
                             label={'Year'}
-                            required/>
+                            error={errors.year}
+                        />
                     </div>
                     <div className='signup-form__flex'>
                         <Password
@@ -82,14 +100,15 @@ const SignUp = () => {
                             value={user.password}
                             onChange={handleChange}
                             label={'Password'}
-                            required
+                            error={errors.password}
                         />
                         <Password
                             name={'confirmPassword'}
                             value={user.confirmPassword}
                             onChange={handleChange}
                             label={'Repeat password'}
-                            required
+                            error={errors.confirmPassword}
+
                         />
                     </div>
                     <div className={'signup-form__buttons signup-form__flex'}>
@@ -106,4 +125,8 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+const mapDispatchToProps = dispatch => ({
+    signUpRequest: user => dispatch(userSignUpRequest(user))
+})
+
+export default connect(null, mapDispatchToProps)(SignUp)

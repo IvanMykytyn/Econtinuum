@@ -35,7 +35,6 @@
     &__flex {
       display: flex;
       justify-content: space-between;
-      align-items: center;
     }
 
     &__text {
@@ -48,6 +47,7 @@
 
     &__buttons {
       margin-top: 10px;
+      align-items: center;
     }
   }
 
@@ -62,5 +62,6 @@
   &__link{
     text-decoration: underline;
     cursor: pointer;
+    color: #6EB39A;
   }
 }

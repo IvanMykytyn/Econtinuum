@@ -1,8 +1,11 @@
 import './form-input.styles.scss'
 
-const FormInput = ({handleChange, label,...otherProps}) => {
+const FormInput = ({handleChange, label, error, ...otherProps}) => {
     return (
-        <input className='form-input' onChange={handleChange} {...otherProps} placeholder={label}/>
+        <div className='form-input-container'>
+            <input className={`form-input ${error && 'has-error'}`} onChange={handleChange} {...otherProps} placeholder={label}/>
+            {error && <span className='help-block'>{error}</span>}
+        </div>
     )
 }
 
