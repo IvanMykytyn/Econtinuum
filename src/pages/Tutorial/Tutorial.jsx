@@ -1,13 +1,17 @@
 import React from "react";
+import Footer from "../../components/Footer/Footer";
 
-import './tutorial.styles.scss'
+import "./tutorial.styles.scss";
 
 const Tutorial = () => {
+  return (
+    <>
+      <main>
+        <h1>Something</h1>
+      </main>
+      <Footer />
+    </>
+  );
+};
 
-    return(
-        <>
-        </>
-    )
-}
-
-export default Tutorial
+export default Tutorial;
