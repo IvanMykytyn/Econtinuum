@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './sign-up.styles.scss'
 import FormInput from "../../components/FormInput/FormInput";
 import Password from "../../components/Password/Password";
@@ -12,6 +12,7 @@ import TitleFormField from "../../components/_common/TitleFormField/TitleFormFie
 import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
 
 const SignUp = ({signUpRequest, auth: {isLoading, errorMessage}}) => {
+    const navigate = useNavigate()
     const [user, setUser] = useState({
         first_name: '',
         last_name: '',
@@ -64,6 +65,7 @@ const SignUp = ({signUpRequest, auth: {isLoading, errorMessage}}) => {
                     confirmPassword: '',
                 })
                 setErrors({})
+                navigate('/')
             }
         }
     }

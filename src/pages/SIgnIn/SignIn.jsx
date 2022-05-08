@@ -4,7 +4,7 @@ import './sign-in.styles.scss'
 import FormInput from "../../components/FormInput/FormInput";
 import Password from "../../components/Password/Password";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
 import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
 import {validateInput} from "../../utils/SignIn/validateInput";
@@ -12,8 +12,7 @@ import {userSignInRequest} from "../../redux/auth/auth.actions";
 import {connect} from "react-redux";
 
 const SignIn = ({signInRequest, auth: {isLoading, errorMessage}}) => {
-
-
+    const navigate = useNavigate()
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -34,13 +33,13 @@ const SignIn = ({signInRequest, auth: {isLoading, errorMessage}}) => {
         event.preventDefault()
         if (isValid()) {
             const result = await signInRequest(user)
-            console.log(result)
             if (result) {
                 setUser({
                     email: '',
                     password: '',
                 })
                 setErrors({})
+                navigate('/')
             }
         }
     }

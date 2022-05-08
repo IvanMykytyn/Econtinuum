@@ -10,10 +10,12 @@ import Tutorial from "./pages/Tutorial/Tutorial";
 import Rating from "./pages/Rating/Rating";
 import FormPage from "./pages/FormPage/FormPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <div>
+      <Header/>
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="sign-in" element={<SignIn/>}/>
