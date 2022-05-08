@@ -1,29 +1,50 @@
 import axios from "axios";
 import {AuthActionTypes} from "./auth.types";
 
-export const signUpRequestStart = () => ({
-    type: AuthActionTypes.SIGN_UP_REQUEST_START
+export const authRequestStart = () => ({
+    type: AuthActionTypes.USER_AUTH_REQUEST_START
 })
 
-export const signUpRequestSuccess = (data) => ({
-    type: AuthActionTypes.SIGN_UP_REQUEST_SUCCESS,
+export const authRequestSuccess = (data) => ({
+    type: AuthActionTypes.USER_AUTH_REQUEST_SUCCESS,
     payload: data,
 })
 
-export const signUpRequestFailure = (errorsObject) => ({
-    type: AuthActionTypes.SIGN_UP_REQUEST_FAILURE,
+export const authRequestFailure = (errorsObject) => ({
+    type: AuthActionTypes.USER_AUTH_REQUEST_FAILURE,
     payload: errorsObject.message
 })
 
 export function userSignUpRequest(userData) {
-    return async dispatch => {
-        dispatch(signUpRequestStart())
-        await axios.post('https://eco-project-back-end.herokuapp.com/register', userData)
-            .then(data => dispatch(signUpRequestSuccess(data.data)))
-            .catch(errorObject => {
-                dispatch(signUpRequestFailure(errorObject))
-                return false
+    return  dispatch => {
+        let result = true
+        dispatch(authRequestStart())
+         axios.post('https://eco-project-back-end.herokuapp.com/register', userData)
+            .then(data => {
+                localStorage.setItem('user', JSON.stringify(data.data))
+                dispatch(authRequestSuccess(data.data))
             })
-        return true
+            .catch(errorObject => {
+                dispatch(authRequestFailure(errorObject.response.data))
+                result = false
+            })
+        return result
+    }
+}
+
+export function userSignInRequest(userData) {
+    return  dispatch => {
+        let result = true
+        dispatch(authRequestStart())
+         axios.post('https://eco-project-back-end.herokuapp.com/login', userData)
+            .then(data => {
+                localStorage.setItem('user', JSON.stringify(data.data))
+                dispatch(authRequestSuccess(data.data))
+            })
+            .catch(errorObject => {
+                dispatch(authRequestFailure(errorObject.response.data))
+                result = false
+            })
+        return result
     }
 }

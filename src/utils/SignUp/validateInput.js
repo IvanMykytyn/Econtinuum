@@ -1,16 +1,17 @@
 import Validator from "validator";
+import validateDate from 'validate-date'
 
 export const validateInput = data => {
     let errors = {}
 
     if (Validator.isEmpty(data.first_name.trim())) {
         errors.first_name = 'First name is required'
-    }else if (/\s/.test(data.first_name)){
+    } else if (/\s/.test(data.first_name)) {
         errors.first_name = 'First name is invalid'
     }
     if (Validator.isEmpty(data.last_name.trim())) {
         errors.last_name = 'Last name is required'
-    }else if(/\s/.test(data.last_name)){
+    } else if (/\s/.test(data.last_name)) {
         errors.last_name = 'Last name is invalid'
     }
     if (Validator.isEmpty(data.email.trim())) {
@@ -34,11 +35,15 @@ export const validateInput = data => {
         errors.year = 'Year is invalid'
     }
 
-    if (Validator.isEmpty(data.password.trim())) {
-        errors.password = 'Password is required'
-    } else if (!data.password.match(/[0-9]/g) || !data.password.length >= 8 || !data.password.match(/[A-Z]/g)) {
-        errors.password = 'Password is invalid'
+    if (!validateDate(`${data.year}-${data.month}-${data.day}`, 'boolean', 'yyyy-mm-dd')){
+        errors.day = 'Day is invalid'
     }
+
+        if (Validator.isEmpty(data.password.trim())) {
+            errors.password = 'Password is required'
+        } else if (!data.password.match(/[0-9]/g) || !data.password.length >= 8 || !data.password.match(/[A-Z]/g)) {
+            errors.password = 'Password is invalid'
+        }
     if (Validator.isEmpty(data.confirmPassword.trim())) {
         errors.confirmPassword = 'Confirm password is required'
     } else if (!data.password.match(/[0-9]/g) || !data.password.length >= 8 || !data.password.match(/[A-Z]/g)) {

@@ -9,18 +9,19 @@ const INITIAL_STATE = {
 
 export const authReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case AuthActionTypes.SIGN_UP_REQUEST_START:
+        case AuthActionTypes.USER_AUTH_REQUEST_START:
             return {
                 ...state,
                 isLoading: true
             }
-        case AuthActionTypes.SIGN_UP_REQUEST_SUCCESS:
+        case AuthActionTypes.USER_AUTH_REQUEST_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
-                userObject: action.payload
+                userObject: action.payload,
+                errorMessage: null
             }
-        case AuthActionTypes.SIGN_UP_REQUEST_FAILURE:
+        case AuthActionTypes.USER_AUTH_REQUEST_FAILURE:
             return {
                 ...state,
                 isLoading: false,

@@ -8,8 +8,10 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import {userSignUpRequest} from "../../redux/auth/auth.actions";
 import {connect} from "react-redux";
 import {validateInput} from "../../utils/SignUp/validateInput";
+import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
+import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
 
-const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) => {
+const SignUp = ({signUpRequest, auth: {isLoading, errorMessage}}) => {
     const [user, setUser] = useState({
         first_name: '',
         last_name: '',
@@ -25,6 +27,7 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
     const handleChange = event => {
         const {name, value} = event.target
         setUser({...user, [name]: value})
+        setErrors({...errors, [name]: ''})
     }
 
     const isValid = () => {
@@ -35,7 +38,7 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
         return isValid
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault()
 
         if (isValid()) {
@@ -46,30 +49,30 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
                 email: user.email,
                 password: user.password.toString(),
             }
-            const result = signUpRequest(send_user)
-            if (!result) {
-                console.log(errorMessage)
-                return
+            const result = await signUpRequest(send_user)
+
+
+            if (result) {
+                setUser({
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    day: '',
+                    month: '',
+                    year: '',
+                    password: '',
+                    confirmPassword: '',
+                })
+                setErrors({})
             }
-            localStorage.setItem('user', JSON.stringify(userObject))
-            setUser({
-                first_name: '',
-                last_name: '',
-                email: '',
-                day: '',
-                month: '',
-                year: '',
-                password: '',
-                confirmPassword: '',
-            })
-            setErrors({})
         }
     }
     return (
-        <div className='container'>
+        <div className='signup-container'>
             <div className='signup'>
-                <h2 className='signup__title'>Sign up</h2>
-                <span className='signup__subtitle'>Create your own story</span>
+                <TitleFormField>Sign Up</TitleFormField>
+                <SubtitleFormField>Create your own story</SubtitleFormField>
+
                 <form className='signup-form' onSubmit={handleSubmit}>
                     <div className='signup-form__flex'>
                         <FormInput
@@ -79,6 +82,7 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
                             onChange={handleChange}
                             label={'First name'}
                             error={errors.first_name}
+
                         />
                         <FormInput
                             type='text'
@@ -95,7 +99,7 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
                         value={user.email}
                         onChange={handleChange}
                         label={'Email address'}
-                        error={errors.email}
+                        error={errors.email ? errors.email : errorMessage}
                     />
                     <div className='signup-form__flex'>
                         <FormInput
@@ -105,6 +109,8 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
                             onChange={handleChange}
                             label={'Day'}
                             error={errors.day}
+
+
                         />
                         <FormInput
                             type='number'
@@ -113,6 +119,7 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
                             onChange={handleChange}
                             label={'Month'}
                             error={errors.month}
+
                         />
                         <FormInput
                             type='number'
@@ -147,7 +154,7 @@ const SignUp = ({signUpRequest, auth: {isLoading, userObject, errorMessage}}) =>
                     </div>
                 </form>
                 <p className='signup__description'>
-                    Already have an account? <Link className='signup__link' to={'/sign-in'}>Log in</Link>
+                    Already have an account? <Link className='signup__link' to={'/sign-in'}>Sign in</Link>
                 </p>
             </div>
         </div>

@@ -1,5 +1,5 @@
 
-.container {
+.signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,5 +63,8 @@
     text-decoration: underline;
     cursor: pointer;
     color: #6EB39A;
+    &:hover{
+      text-decoration: none;
+    }
   }
 }
