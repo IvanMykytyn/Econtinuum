@@ -1,0 +1,12 @@
+#root {
+  position: relative;
+  min-height: 100vh;
+}
+main {
+  padding-bottom: 100px; /* Footer height */
+}
+@media (max-width: 1000px) {
+  main {
+    padding-bottom: 340px; /* Footer height */
+  }
+}

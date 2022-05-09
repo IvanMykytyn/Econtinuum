@@ -1,5 +1,5 @@
-import {Route, Routes} from "react-router-dom";
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 
 import Homepage from "./pages/Homepage/Homepage";
 import SignIn from "./pages/SIgnIn/SignIn";
@@ -11,22 +11,24 @@ import Rating from "./pages/Rating/Rating";
 import FormPage from "./pages/FormPage/FormPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <div>
-      <Header/>
+      <Header />
       <Routes>
-        <Route path="/" element={<Homepage/>}/>
-        <Route path="sign-in" element={<SignIn/>}/>
-        <Route path="sign-up" element={<SignUp/>}/>
-        <Route path="profile" element={<Profile/>}/>
-        <Route path="activities" element={<Activities/>}/>
-        <Route path="tutorial" element={<Tutorial/>}/>
-        <Route path="rating" element={<Rating/>}/>
-        <Route path="form" element={<FormPage/>}/>
-        <Route path="*" element={<ErrorPage/>}/>
+        <Route path="/" element={<Homepage />} />
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="activities" element={<Activities />} />
+        <Route path="tutorial" element={<Tutorial />} />
+        <Route path="rating" element={<Rating />} />
+        <Route path="form" element={<FormPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -13,16 +13,9 @@
   height: 45px;
   background: #6EB29A;
   border-radius: 12px;
-  transition-duration:0.3s;
-
-  &:hover {
-    background-color: #fff;
-    color: #6EB29A;
-    border: 1px solid #6EB29A;
-  }
 }
-
 .google-button {
+
   background: #FFFFFF;
   border: 1px solid #8F8C9C;
   box-sizing: border-box;
@@ -35,7 +28,7 @@
 
   color: #8F8C9C;
   display: flex;
-  justify-content:center;
+  justify-content: space-around;
   align-items: center;
 
   .google-logo {
