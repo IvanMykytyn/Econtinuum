@@ -1,17 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {Link, useNavigate} from "react-router-dom";
 import './sign-up.styles.scss'
 import FormInput from "../../components/FormInput/FormInput";
 import Password from "../../components/Password/Password";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import {userSignUpRequest} from "../../redux/auth/auth.actions";
+import {authFailureReset, userSignUpRequest} from "../../redux/auth/auth.actions";
 import {connect} from "react-redux";
 import {validateInput} from "../../utils/SignUp/validateInput";
 import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
 import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
 
-const SignUp = ({signUpRequest, auth: {isLoading, errorMessage}}) => {
+const SignUp = ({signUpRequest, resetErrorMessage, auth: {isLoading, errorMessage}}) => {
+    useEffect(() => () => {
+        if (errorMessage) {
+            resetErrorMessage()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const navigate = useNavigate()
     const [user, setUser] = useState({
         first_name: '',
@@ -164,7 +170,8 @@ const SignUp = ({signUpRequest, auth: {isLoading, errorMessage}}) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    signUpRequest: user => dispatch(userSignUpRequest(user))
+    signUpRequest: user => dispatch(userSignUpRequest(user)),
+    resetErrorMessage: () => dispatch(authFailureReset())
 })
 const mapStateToProps = state => ({
     auth: state.auth
