@@ -4,13 +4,14 @@ import './header.styles.scss'
 import {Link, NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {userLogoutRequest} from "../../redux/auth/auth.actions";
+import Logo from "../_common/Logo/Logo";
 
 const Header = ({user,userLogout}) => {
     return (
         <header className="header">
             <div className='header-content'>
                 <Link to='/' className="header-logo">
-                    <span className="header-logo__text"><span>Eco</span>ntinuum</span>
+                    <Logo/>
                 </Link>
                 <nav className="header-buttons">
                     <ul className='header-links'>

@@ -6,12 +6,12 @@ export const validateInput = data => {
 
     if (Validator.isEmpty(data.first_name.trim())) {
         errors.first_name = 'First name is required'
-    } else if (/\s/.test(data.first_name)) {
+    } else if (!/^[a-zA-Z]+$/.test(data.first_name) || data.first_name.length >= 25 || data.first_name.length <= 1) {
         errors.first_name = 'First name is invalid'
     }
     if (Validator.isEmpty(data.last_name.trim())) {
         errors.last_name = 'Last name is required'
-    } else if (/\s/.test(data.last_name)) {
+    } else if (!/^[a-zA-Z]+$/.test(data.first_name) || data.last_name.length >= 25 || data.last_name.length <= 1) {
         errors.last_name = 'Last name is invalid'
     }
     if (Validator.isEmpty(data.email.trim())) {
@@ -35,18 +35,18 @@ export const validateInput = data => {
         errors.year = 'Year is invalid'
     }
 
-    if (!validateDate(`${data.year}-${data.month}-${data.day}`, 'boolean', 'yyyy-mm-dd')){
+    if (!validateDate(`${data.year}-${data.month}-${data.day}`, 'boolean', 'yyyy-mm-dd')) {
         errors.day = 'Day is invalid'
     }
 
-        if (Validator.isEmpty(data.password.trim())) {
-            errors.password = 'Password is required'
-        } else if (!data.password.match(/[0-9]/g) || !data.password.length >= 8 || !data.password.match(/[A-Z]/g)) {
-            errors.password = 'Password is invalid'
-        }
+    if (Validator.isEmpty(data.password.trim())) {
+        errors.password = 'Password is required'
+    } else if (!data.password.match(/[0-9]/g) || data.password.length <= 8 || data.password.length >= 25 || !data.password.match(/[A-Z]/g)) {
+        errors.password = 'Password is invalid'
+    }
     if (Validator.isEmpty(data.confirmPassword.trim())) {
         errors.confirmPassword = 'Confirm password is required'
-    } else if (!data.password.match(/[0-9]/g) || !data.password.length >= 8 || !data.password.match(/[A-Z]/g)) {
+    } else if (!data.password.match(/[0-9]/g) || data.password.length <= 8 || data.password.length >= 25 || !data.password.match(/[A-Z]/g)) {
         errors.confirmPassword = 'Confirm password is invalid'
     }
     if (!Validator.equals(data.password, data.confirmPassword)) {
