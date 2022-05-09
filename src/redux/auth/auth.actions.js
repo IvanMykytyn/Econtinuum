@@ -4,6 +4,9 @@ import {AuthActionTypes} from "./auth.types";
 export const authRequestStart = () => ({
     type: AuthActionTypes.USER_AUTH_REQUEST_START
 })
+export const authFailureReset = () => ({
+    type: AuthActionTypes.USER_AUTH_FAILURE_RESET
+})
 
 export const authRequestSuccess = (data) => ({
     type: AuthActionTypes.USER_AUTH_REQUEST_SUCCESS,
@@ -16,11 +19,12 @@ export const authRequestFailure = (errorsObject) => ({
 })
 
 export function userSignUpRequest(userData) {
-    return  dispatch => {
-        let result = true
+    return async dispatch => {
+        let result = false
         dispatch(authRequestStart())
-         axios.post('https://eco-project-back-end.herokuapp.com/register', userData)
+        await axios.post('https://eco-project-back-end.herokuapp.com/register', userData)
             .then(data => {
+                result = true
                 localStorage.setItem('user', JSON.stringify(data.data))
                 dispatch(authRequestSuccess(data.data))
             })
@@ -33,18 +37,27 @@ export function userSignUpRequest(userData) {
 }
 
 export function userSignInRequest(userData) {
-    return  dispatch => {
+    return async dispatch => {
         let result = true
         dispatch(authRequestStart())
-         axios.post('https://eco-project-back-end.herokuapp.com/login', userData)
+        await axios.post('https://eco-project-back-end.herokuapp.com/login', userData)
             .then(data => {
                 localStorage.setItem('user', JSON.stringify(data.data))
                 dispatch(authRequestSuccess(data.data))
             })
             .catch(errorObject => {
-                dispatch(authRequestFailure(errorObject.response.data))
                 result = false
+                dispatch(authRequestFailure(errorObject.response.data))
             })
         return result
     }
+}
+
+export const userLogout = () => ({
+    type: AuthActionTypes.USER_AUTH_LOGOUT
+})
+
+export const userLogoutRequest = () => dispatch => {
+    dispatch(userLogout())
+    localStorage.removeItem('user')
 }

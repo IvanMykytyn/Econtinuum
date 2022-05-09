@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import './sign-in.styles.scss'
 import FormInput from "../../components/FormInput/FormInput";
@@ -9,11 +9,17 @@ import {Link, useNavigate} from "react-router-dom";
 import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
 import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
 import {validateInput} from "../../utils/SignIn/validateInput";
-import {userSignInRequest} from "../../redux/auth/auth.actions";
+import {authFailureReset, userSignInRequest} from "../../redux/auth/auth.actions";
 import {connect} from "react-redux";
 
-const SignIn = ({signInRequest, auth: {isLoading, errorMessage}}) => {
+const SignIn = ({signInRequest, resetErrorMessage, auth: {isLoading, errorMessage}}) => {
     const navigate = useNavigate()
+    useEffect(() => () => {
+        if (errorMessage) {
+            resetErrorMessage()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -21,7 +27,7 @@ const SignIn = ({signInRequest, auth: {isLoading, errorMessage}}) => {
     const [errors, setErrors] = useState({})
     const handleChange = ({target: {name, value}}) => {
         setUser({...user, [name]: value})
-        setErrors({...errors,[name]:''})
+        setErrors({...errors, [name]: ''})
     }
     const isValid = () => {
         const {errors, isValid} = validateInput(user)
@@ -34,6 +40,7 @@ const SignIn = ({signInRequest, auth: {isLoading, errorMessage}}) => {
         event.preventDefault()
         if (isValid()) {
             const result = await signInRequest(user)
+            console.log(result)
             if (result) {
                 setUser({
                     email: '',
@@ -85,7 +92,8 @@ const SignIn = ({signInRequest, auth: {isLoading, errorMessage}}) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    signInRequest: data => dispatch(userSignInRequest(data))
+    signInRequest: data => dispatch(userSignInRequest(data)),
+    resetErrorMessage: () => dispatch(authFailureReset())
 })
 const mapStateToProps = state => ({
     auth: state.auth

@@ -1,22 +1,25 @@
+@import url('http://fonts.cdnfonts.com/css/gilroy-bold');
 
 .header {
+  font-size: 20px;
   position: fixed;
   width: 100vw;
   top: 0;
   left: 0;
   z-index: 50;
   background-color: #fff;
-  padding: 10px 40px;
+  padding: 10px 34px;
   box-sizing: border-box;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+
   a {
-    color: #000;
     text-decoration: none;
   }
+
   ul,
   ul li,
   ul ul li {
@@ -24,87 +27,123 @@
     margin: 0;
     list-style-type: none;
   }
-  .active{
-    color: #6EB29A;
+
+  .active {
+    color: #35AD83;
   }
 }
 
 
 .header-logo {
   display: flex;
-  align-items: center;
-}
+  align-items: baseline;
 
-.header-logo__picture {
+  margin-right: 40px;
 }
 
 .header-logo__text {
-  font-size: 24px;
-  line-height: 38px;
+  color: #000;
+  font-family: Gilroy, sans-serif;
+  font-style: normal;
+  font-size: 30px;
   letter-spacing: -0.04em;
-  color: #161716;
-}
+  font-weight: 700;
 
-.header-logo__text b {
-  color: #42A280;
+  span {
+    font-weight: 800;
+    color: #35AD83;
+  }
 }
-
 
 .header-buttons {
+  position: relative;
+
   .header-links {
     display: flex;
   }
 
   &__button + &__button {
-    margin-left: 75px;
+    margin-left: 45px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 2px;
+    background: #E1E4E9;
+    border-radius: 10px;
+    left: 0;
+    top: 0;
+    bottom: 0;
   }
 }
 
 .header-buttons__button {
   display: block;
-  font-weight: 500;
-  font-size: 26px;
-  line-height: 31px;
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
 
-  &:first-child {
-    margin-left: 0;
-  }
+  line-height: 33px;
 
   a {
-    position: relative;
+    color: #555461;
 
     &:hover {
-      color: #6EB39A;
-      &::before{
-        content: '';
-        display: block;
-        position: absolute;
-        height: 3px;
-        left: -20px;
-        right: -20px;
-        bottom: -13px;
-        background-color: #6EB29A;
-      }
+      color: #000;
     }
+
+  }
+
+  &:first-child {
+    margin-left: 45px;
   }
 }
 
-
-.header-signup-button {
-  width: 160px;
+.header-content {
   display: flex;
-  justify-content: flex-end;
+  align-items: baseline;
 }
 
-.header-signup-button__text {
-  font-size: 24px;
-  padding: 5px;
-  margin-right: 7px;
+.header-auth {
+  font-family: 'Overpass', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 33px;
+  display: flex;
+  align-items: center;
+
+  &__signup {
+    color: #555461;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  &__signin {
+    color: #555461;
+    margin-left: 28px;
+    border: 2px solid #BFBFBF;
+    border-radius: 30px;
+    padding: 3px 15px;
+
+    &:hover {
+      background: #6EB29A;
+      border: 2px solid #FFFFFF;
+      color: #fff;
+    }
+  }
+
 }
 
+.header-auth__signin.active {
+  background: #6EB29A;
+  border: 2px solid #FFFFFF;
+  color: #fff;
+}
 
-.header-signup-button__picture {
-  margin-right: 10px;
-  padding-top: 6px;
-  width: 24px;
+.header-auth__logout{
+  border: 2px solid #BFBFBF;
+  border-radius: 30px;
 }
