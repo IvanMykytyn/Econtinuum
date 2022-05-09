@@ -9,7 +9,6 @@ const Tutorial = () => {
       <main>
         <h1>Something</h1>
       </main>
-      <Footer />
     </>
   );
 };
