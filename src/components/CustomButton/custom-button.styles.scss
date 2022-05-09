@@ -1,4 +1,4 @@
-.custom-button{
+.custom-button {
   cursor: pointer;
   font-weight: 700;
   font-size: 18px;
@@ -14,7 +14,8 @@
   background: #6EB29A;
   border-radius: 12px;
 }
-.google-button{
+.google-button {
+
   background: #FFFFFF;
   border: 1px solid #8F8C9C;
   box-sizing: border-box;
@@ -29,7 +30,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  .google-logo{
+
+  .google-logo {
+    margin-right: 15px;
     width: 17px;
     height: 17px;
   }

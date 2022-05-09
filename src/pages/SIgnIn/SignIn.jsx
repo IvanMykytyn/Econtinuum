@@ -1,45 +1,93 @@
-import React from "react";
+import React, { useState} from "react";
 
 import './sign-in.styles.scss'
 import FormInput from "../../components/FormInput/FormInput";
 import Password from "../../components/Password/Password";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import {Link} from "react-router-dom";
 
-const SignIn = () => {
+import {Link, useNavigate} from "react-router-dom";
+import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
+import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
+import {validateInput} from "../../utils/SignIn/validateInput";
+import {userSignInRequest} from "../../redux/auth/auth.actions";
+import {connect} from "react-redux";
 
+const SignIn = ({signInRequest, auth: {isLoading, errorMessage}}) => {
+    const navigate = useNavigate()
+    const [user, setUser] = useState({
+        email: '',
+        password: '',
+    })
+    const [errors, setErrors] = useState({})
+    const handleChange = ({target: {name, value}}) => {
+        setUser({...user, [name]: value})
+        setErrors({...errors,[name]:''})
+    }
+    const isValid = () => {
+        const {errors, isValid} = validateInput(user)
+        if (!isValid) {
+            setErrors(errors)
+        }
+        return isValid
+    }
+    const handleSubmit = async event => {
+        event.preventDefault()
+        if (isValid()) {
+            const result = await signInRequest(user)
+            if (result) {
+                setUser({
+                    email: '',
+                    password: '',
+                })
+                setErrors({})
+                navigate('/')
+            }
+        }
+    }
     return (
-        <div className="wrapper">
-            <div className="form sign-in">
-                <h2 className="title">Sign In</h2>
-                <p className="description">Sign in to your account</p>
-                <form action="#">
+        <div className="sign-in-wrapper">
+            <div className="sign-form">
+                <TitleFormField>Sign In</TitleFormField>
+                <SubtitleFormField>Sign in to your account</SubtitleFormField>
+                <form onSubmit={handleSubmit}>
                     <FormInput
-                        type='email'
+                        name={'email'}
+                        type='text'
                         label={'Email address'}
-                        required
+                        value={user.email}
+                        onChange={handleChange}
+                        error={errors.email}
                     />
                     <Password
+                        name={'password'}
                         label={'Password'}
-                        required
+                        value={user.password}
+                        onChange={handleChange}
+                        error={errors.password ? errors.password : errorMessage}
                     />
-                    <div className="forget-the-password">
-                        Forgot your <Link className="form-link" to={'/forget'}>password?</Link>
+
+                    <div className="sign-form__link">
+                        Forgot your <Link className="sign-form__link-forget" to={'/forget'}>password?</Link>
                     </div>
 
-                    <CustomButton type='submit'>Sign in</CustomButton>
-                    <p className="or-text">or</p>
+                    <CustomButton disabled={isLoading} type='submit'>Sign in</CustomButton>
+                    <p className="sign-in__text-or">or</p>
                     <CustomButton googleButton>Sign in with google</CustomButton>
                 </form>
 
-                <div className="not-sign-up">
-                    Don't have an account? <Link className="sign-up-link" to='/sign-up'>Sign up</Link>
+                <div className="sign-form__link">
+                    Don't have an account? <Link className="sign-form__link-not" to='/sign-up'>Sign up</Link>
                 </div>
             </div>
+
         </div>
-
-
     )
 }
 
-export default SignIn
+const mapDispatchToProps = dispatch => ({
+    signInRequest: data => dispatch(userSignInRequest(data))
+})
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

@@ -1,202 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;400;700&display=swap');
 
 
-.wrapper {
+.sign-in-wrapper {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  background-size: cover;
-  font-family: 'Barlow', sans-serif;
+  background: #B2D8C9;
 }
 
-.form {
-  max-width: 509px;
+.sign-form {
+  text-align: center;
+  width: 309px;
   background: #f5f5f5;
   border-radius: 48px;
-  padding: 34px 120px 32px 120px; //
+  padding: 34px 80px 32px 80px; //
 }
 
-.form .title {
-  text-align: center;
-  position: relative;
-  font-size: 34px;
-  font-weight: 700;
-  color: #41484E;
-  margin-bottom: 10px;
+.sign-form form {
+  margin: 16px 0;
 }
 
-.description {
-  text-align: center;
-  position: relative;
-  font-size: 15px;
+
+.sign-form .sign-form__link {
+  //text-align: left;
   font-weight: 400;
+  font-size: 15.1698px;
+  line-height: 18px;
   color: #41484E;
-  margin-bottom: 13px;
+  margin-bottom: 17px;
 }
 
-
-.form .input-field {
-  margin-top: 14px;
-  height: 50px;
-  width: 100%;
-  position: relative;
+.sign-form .sign-form__link-forget {
+  color: #6EB39A;
+  &:hover{
+    text-decoration:none;
+  }
 }
 
-.input-field input {
-  position: absolute;
-  padding: 0 15px;
-  border: 2px solid #e5e5e5;
-  border-radius: 10px;
-  outline: none;
-  background: white;
-  height: 100%;
-  width: 100%;
-  transition: all 0.2s ease;
-  font-size: 15px;
-  font-weight: 400;
-  color: #8F8C9C;
+.sign-form .sign-form__link-not {
+  color: #6EB39A;
+  &:hover{
+    text-decoration:none;
+
+  }
 }
 
-.input-field input:is(:focus, :valid) {
-  border: 2px solid #41484E
-}
-
-// input { 
-//     text-align: left; 
-// }
-
-.input-field i {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: lightgray;
-  font-size: 23px;
-}
-
-.input-field input:is(:focus, :valid) ~ i {
-  color: #41484E
-}
-
-// .input-field i.icon{
-//      left: 0;
-// }
-
-// .input-field i.showHidePw{
-//     right: 0;
-// }
-
- .form .forget {
-  text-decoration: none;
-  margin: 5px;
-  color: #41484E;
-  font-size: 15px;
-}
-
-.green_text {
-  color: #63AF94;
-}
-
-// .button-container{
-//     display: flex;
-//     justify-content: space-between;
-//     flex-direction: column;
-//     align-items: center;
-// }
-
-.sign-up-link {
-  color: #41484E;
-}
-
-.sign-up-link:hover {
-  color: black;
-}
-
-#sign-in {
-  margin-top: 17px;
-  background-color: #63AF94;
-  align-items: center;
-  width: 204.79px;
-  height: 55.62px;
-  left: calc(50% - 204.79px / 2);
-  position: relative;
-  font-size: 23px;
-  color: white;
-  font-weight: 700;
-  border-radius: 16px;
-  border-style: none;
-}
-
-#google {
-  margin-top: 14px;
-  background-color: white;
-  align-items: center;
-  width: 248.41px;
-  height: 36.66px;
-  left: calc(50% - 248.41px / 2);
-  position: relative;
-  font-size: 15px;
-  color: #8F8C9C;
-  font-weight: 400;
-  border-radius: 19px;
-  border-style: none;
-}
-
-#sign-in:hover {
-  background-color: #42A380;
-}
-
-#google:hover {
-  border-style: inset;
-  border-color: #8F8C9C;
-}
-
-// .form .button{
-//     align-items: center;
-//     width: 204.79px;
-//     height: 55.62px;
-//     left: calc(50% - 204.79px/2);
-// }
-
-// .form .button input{
-//     position: absolute;
-//     font-size: 23px;
-//     color: white;
-//     background-color: #63AF94;
-//     font-weight: 700;
-//     border-radius: 16px;
-// }
-
-
-// .form .button:hover{
-//     border-color: #41484E;
-// } 
-
-.form .or-text {
-  text-align: center;
-  position: relative;
-  font-weight: 400;
+.sign-form .sign-in__text-or {
   font-size: 15px;
   margin-top: 13px;
   margin-bottom: 13px;
-  color: #8F8C9C
+  color: #8F8C9C;
+  position: relative;
+  &::before,&:after{
+    content: '';
+    display: block;
+    position: absolute;
+    height: 1px;
+    top: 50%;
+    width: 140px;
+    background-color: #8F8C9C;
+  }
+  &::before{
+    left: -10px;
+  }
+  &::after{
+    right: -10px;
+  }
 }
 
-.not-sign-up {
-  text-align: center;
+.sign-form__link-not {
   margin-top: 22px;
   color: #41484E;
-}
-
-.form{
-  .forget-the-password{
-    font-weight: 400;
-    font-size: 15.1698px;
-    line-height: 18px;
-    margin-bottom: 17px;
-    .form-link{
-      color: #6EB39A;
-    }
-  }
 }
