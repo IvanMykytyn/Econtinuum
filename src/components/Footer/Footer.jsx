@@ -2,12 +2,13 @@ import React from "react";
 import { BsYoutube, BsTwitter, BsInstagram } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import "./footer.styles.scss";
+import Logo from "../_common/Logo/Logo";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="logo-box">
-        <h1>Site Name</h1> {/* TODO Logo component */}
+          <Logo/>
       </div>
       <div className="contacts-box">
         <h4>Contacts</h4>

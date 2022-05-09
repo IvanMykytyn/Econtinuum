@@ -34,6 +34,9 @@ const SignUp = ({signUpRequest, resetErrorMessage, auth: {isLoading, errorMessag
     const handleChange = event => {
         const {name, value} = event.target
         setUser({...user, [name]: value})
+        if (name === 'email') {
+            resetErrorMessage()
+        }
         setErrors({...errors, [name]: ''})
     }
 
@@ -117,8 +120,8 @@ const SignUp = ({signUpRequest, resetErrorMessage, auth: {isLoading, errorMessag
                             onChange={handleChange}
                             label={'Day'}
                             error={errors.day}
-
-
+                            min={1}
+                            max={31}
                         />
                         <FormInput
                             type='number'
@@ -127,7 +130,8 @@ const SignUp = ({signUpRequest, resetErrorMessage, auth: {isLoading, errorMessag
                             onChange={handleChange}
                             label={'Month'}
                             error={errors.month}
-
+                            min={1}
+                            max={12}
                         />
                         <FormInput
                             type='number'
@@ -136,6 +140,8 @@ const SignUp = ({signUpRequest, resetErrorMessage, auth: {isLoading, errorMessag
                             onChange={handleChange}
                             label={'Year'}
                             error={errors.year}
+                            min={1960}
+                            max={new Date().getFullYear()}
                         />
                     </div>
                     <div className='signup-form__flex'>
