@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
+@import "./form.styles";
 
 $bgColor: #f1ffe5;
 $separateHrColor: #556748;
@@ -30,6 +32,7 @@ main {
   min-height: 100vh;
   padding-top: 60px;
   background-color: $bgColor;
+  position: relative;
 }
 
 .title-box {
