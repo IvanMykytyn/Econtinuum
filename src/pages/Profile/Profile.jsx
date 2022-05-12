@@ -1,13 +1,14 @@
 import React from "react";
 
-import './profile.styles.scss'
+import "./profile.styles.scss";
 
 const Profile = () => {
+  // console.log("some2");
+  return (
+    <>
+      <h1>Just something</h1>
+    </>
+  );
+};
 
-    return (
-        <>
-        </>
-    )
-}
-
-export default Profile
+export default Profile;
