@@ -40,7 +40,6 @@ const SignIn = ({signInRequest, resetErrorMessage, auth: {isLoading, errorMessag
         event.preventDefault()
         if (isValid()) {
             const result = await signInRequest(user)
-            console.log(result)
             if (result) {
                 setUser({
                     email: '',

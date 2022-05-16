@@ -1,9 +1,9 @@
 import './form-input.styles.scss'
 
-const FormInput = ({handleChange, label, error, ...otherProps}) => {
+const FormInput = ({label, error, ...otherProps}) => {
     return (
         <div className='form-input-container'>
-            <input className={`form-input ${error ? 'has-error' : ''}`} onChange={handleChange} {...otherProps} autoComplete='on' placeholder={label}/>
+            <input className={`form-input ${error ? 'has-error' : ''}`}  {...otherProps} autoComplete='on' placeholder={label}/>
             {error && <span className='help-block'>{error}</span>}
         </div>
     )
