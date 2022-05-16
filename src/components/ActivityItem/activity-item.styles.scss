@@ -1,0 +1,90 @@
+@mixin bigCardStyles {
+  text-align: left;
+  padding: 70px 40px 30px 15px;
+
+  h3 {
+    margin: 9px 0;
+  }
+  .task-description {
+    height: 125px;
+    width: 85%;
+  }
+}
+
+@mixin averageCardStyles {
+  padding: 40px 45px 20px 80px;
+  position: relative;
+  min-height: 175px;
+  text-align: center;
+
+  img {
+
+    left: 45px;
+  }
+  h3 {
+    margin-bottom: 10px;
+  }
+}
+
+@mixin smallCardStyles {
+  text-align: center;
+  padding: 5px 5px 10px;
+
+  h3 {
+    margin-bottom: 5px;
+  }
+}
+
+@mixin taskColors($bgTask, $shadowTask, $h3FontSize, $countOfFontSize) {
+  background-color: $bgTask;
+  box-shadow: -12px -12px 0 $shadowTask;
+
+  h3 {
+    font-weight: 700;
+    font-size: $h3FontSize;
+  }
+  .count-of {
+    font-weight: 200;
+    font-size: $countOfFontSize;
+  }
+}
+
+.item__1 {
+  grid-area: a;
+  @include taskColors(#629d9a, #55817e, 38px, 18px);
+  @include bigCardStyles();
+}
+
+.item__2 {
+  grid-area: b;
+  @include taskColors(#9fc088, #7e9b69, 38px, 18px);
+  @include bigCardStyles();
+}
+
+.item__3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: c;
+  @include taskColors(#e8c07d, #c3a269, 28px, 16px);
+  @include averageCardStyles();
+}
+
+.item__4 {
+  grid-area: d;
+  @include taskColors(#a2b38b, #8c9c76, 28px, 16px);
+  @include smallCardStyles();
+}
+
+.item__5 {
+  grid-area: e;
+  @include taskColors(#e4e9be, #cbd0a4, 28px, 16px);
+  @include smallCardStyles();
+}
+
+.item {
+  img {
+    width: 46px;
+    height: 46px;
+  }
+}
