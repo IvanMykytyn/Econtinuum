@@ -1,0 +1,67 @@
+.name-description {
+  h4 {
+    font-weight: 500;
+    font-size: 26px;
+    color: #41484e;
+  }
+  h2 {
+    font-weight: 700;
+    font-size: 40px;
+  }
+}
+.score-description {
+  h4 {
+    font-weight: 400;
+    font-size: 28px;
+    span {
+      font-weight: 600;
+    }
+  }
+}
+.edit-form {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.adjust-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  .save-cancel {
+    display: flex;
+
+    gap: 60px;
+  }
+}
+
+.edit-btn {
+  border: 1px solid #bfbfbf;
+  border-radius: 22px;
+
+  width: 172px;
+  padding: 14px;
+
+  text-align: center;
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+
+  cursor: pointer;
+}
+.edit-btn-white {
+  color: black;
+  background-color: white;
+  &:hover {
+    color: white;
+    background-color: #6eb29a;
+  }
+}
+.edit-btn-green {
+  color: white;
+  background-color: #6eb29a;
+  &:hover {
+    color: black;
+    background-color: white;
+  }
+}
