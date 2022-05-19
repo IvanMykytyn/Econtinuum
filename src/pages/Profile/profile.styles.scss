@@ -1,11 +1,12 @@
-.content {
+.content,
+.rating-content {
   margin-top: 64px;
   font-family: "Gilroy";
   background-color: #fdfbfb;
 
   display: flex;
   nav {
-    width: 24%;
+    width: 22%;
     background-color: #f2f2f2;
 
     .navigation-box {
@@ -73,13 +74,21 @@
 }
 
 .category-section {
-  margin-bottom: 15px;
+  // margin-bottom: 15px;
   .category-title {
     display: flex;
     justify-content: space-between;
-    width: 200px;
     margin-bottom: 15px;
+    cursor: pointer;
 
+    padding: 10px 25px;
+
+    &:hover {
+      color: #6eb29a;
+      background-color: #dedede;
+
+      border-radius: 18px;
+    }
     h4 {
       font-style: normal;
       font-weight: 700;
@@ -107,8 +116,18 @@
   .status-title {
     display: flex;
     justify-content: space-between;
-    width: 200px;
     margin-bottom: 15px;
+
+    cursor: pointer;
+
+    padding: 10px 25px;
+
+    &:hover {
+      color: #6eb29a;
+      background-color: #dedede;
+
+      border-radius: 18px;
+    }
     h4 {
       font-style: normal;
       font-weight: 700;
@@ -133,7 +152,8 @@
 }
 
 .category-list {
-  margin-left: 10px;
+  margin-left: 25px;
+  margin-bottom: 20px;
 
   li {
     display: flex;
@@ -174,7 +194,7 @@
 }
 
 .status-list {
-  margin-left: 10px;
+  margin-left: 25px;
 
   li {
     display: flex;

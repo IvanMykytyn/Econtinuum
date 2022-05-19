@@ -6,9 +6,9 @@ import { IoClose } from "react-icons/io5";
 import { CgSandClock } from "react-icons/cg";
 
 const statusEnum = {
-  success: <BsCheck2 size={20} color={"#6EB29A"} />,
-  failed: <IoClose size={20} color={"#ff5f71"} />,
-  validating: <CgSandClock size={20} color={"#708090"} />,
+  success: <BsCheck2 size={24} color={"#6EB29A"} />,
+  failed: <IoClose size={24} color={"#ff5f71"} />,
+  validating: <CgSandClock size={24} color={"#708090"} />,
 };
 
 const tasks = [
@@ -64,7 +64,7 @@ const TaskHistory = () => {
               <div className="task-data task-points">
                 <p>{task.points}</p>
               </div>
-              <div className="task-data">{task.status}</div>
+              <div className="task-data task-status">{task.status}</div>
               <div className={"category " + task.category.toLowerCase()}>
                 <p>{task.category}</p>
               </div>
