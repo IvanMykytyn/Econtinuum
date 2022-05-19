@@ -61,29 +61,18 @@ const Profile = () => {
         <div className="filter-box">
           <ul>
             <li className="category-section">
-              <div className="category-title">
+              <div
+                className="category-title"
+                onClick={() => {
+                  setCategoryList(!categoryList);
+                }}
+              >
                 <div>
-                  <BiCategory size={22} />
+                  <BiCategory size={30} />
                   <h4>Category</h4>
                 </div>
-                {categoryList && (
-                  <BiChevronUp
-                    size={30}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setCategoryList(false);
-                    }}
-                  />
-                )}
-                {!categoryList && (
-                  <BiChevronDown
-                    size={30}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setCategoryList(true);
-                    }}
-                  />
-                )}
+                {categoryList && <BiChevronUp size={30} />}
+                {!categoryList && <BiChevronDown size={30} />}
               </div>
               {!categoryList && (
                 <ul className="category-list">
@@ -169,29 +158,19 @@ const Profile = () => {
               )}
             </li>
             <li className="status-section">
-              <div className="status-title">
+              <div
+                className="status-title"
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setStatusList(!statusList);
+                }}
+              >
                 <div>
-                  <BiLoaderCircle size={22} />
+                  <BiLoaderCircle size={30} />
                   <h4>Status</h4>
                 </div>
-                {statusList && (
-                  <BiChevronUp
-                    size={30}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setStatusList(false);
-                    }}
-                  />
-                )}
-                {!statusList && (
-                  <BiChevronDown
-                    size={30}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setStatusList(true);
-                    }}
-                  />
-                )}
+                {statusList && <BiChevronUp size={30} />}
+                {!statusList && <BiChevronDown size={30} />}
               </div>
               {!statusList && (
                 <ul className="status-list">
