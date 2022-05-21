@@ -3,7 +3,7 @@ import GarbageIcon from "./garbage.svg";
 import LeafIcon from "./leaf.svg";
 import PlantIcon from "./plant.svg";
 import TechnologyIcon from "./technology.svg";
-import LeftSideLine from "./left-side-line.png";
+import LeftSideLines from "./left-side-lines.png";
 import PlanetIcon from "./planet.png";
 import ClipIcon from "./clip.svg";
 import LocationIcon from "./location.svg";
@@ -15,7 +15,7 @@ export {
   LeafIcon,
   PlantIcon,
   TechnologyIcon,
-  LeftSideLine,
+  LeftSideLines,
   PlanetIcon,
   ClipIcon,
   LocationIcon,

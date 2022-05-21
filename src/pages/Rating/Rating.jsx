@@ -36,8 +36,8 @@ const Rating = () => {
   const [categoryList, setCategoryList] = useState(true);
   const [activeCategory, setActiveCategory] = useState(initialCategories.any);
 
-  const [dateList, setDateList] = useState(true);
-  const [activeDate, setActiveDate] = useState(initialDates.current);
+  // const [dateList, setDateList] = useState(true);
+  // const [activeDate, setActiveDate] = useState(initialDates.current);
 
   const [showMe, setShowMe] = useState(false);
 
@@ -46,7 +46,7 @@ const Rating = () => {
       <nav>
         <div className="filter-box">
           <ul>
-            <li className="date-section">
+            {/* <li className="date-section">
               <div
                 className="date-title"
                 onClick={() => setDateList(!dateList)}
@@ -108,7 +108,7 @@ const Rating = () => {
                   </li>
                 </ul>
               )}
-            </li>
+            </li> */}
             <li className="show-me-section">
               <div
                 className={"show-me-title" + (showMe ? " active-show-me" : "")}
