@@ -20,6 +20,7 @@ import {
   TasksIcon,
   LayersIcon,
 } from "./images";
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -41,7 +42,7 @@ const LandingPage = () => {
             viverra at felis.
           </p>
           <div className="sign-up-now">
-            <a href="/sign-up">sign up now</a>
+            <Link to={'/sign-up'}>sign up now</Link>
             <IoIosArrowDroprightCircle size={24} color={"#FFFFFF66"} />
           </div>
         </div>
@@ -51,7 +52,7 @@ const LandingPage = () => {
       </div>
       <div className="about-us-box">
         <div className="lines-img">
-          <img src={leftSideLines} alt="bg-lines"></img>
+          <img src={leftSideLines} alt="bg-lines"/>
         </div>
         <div className="about-us-description">
           <ImQuotesLeft size={100} />
@@ -71,7 +72,7 @@ const LandingPage = () => {
       </div>
       <div className="app-features-box">
         <div className="app-features-title">
-          <img src={leftSideCircles}></img>
+          <img src={leftSideCircles} alt='leftSideCircles'/>
           <div className="title-text">
             <h2>Awesome Web App Features </h2>
             <div className="line-box">
@@ -85,7 +86,7 @@ const LandingPage = () => {
             </p>
           </div>
 
-          <img src={rightSideCircles}></img>
+          <img src={rightSideCircles} alt='rightSideCircles'/>
         </div>
 
         <div className="app-features">
@@ -130,7 +131,7 @@ const LandingPage = () => {
 
           <p>
             Awesome web app features web app features web app features web app
-            features web app features <a href="/activities">try it yourself</a>
+            features web app features <Link to='/activities'>try it yourself</Link>
           </p>
         </div>
 

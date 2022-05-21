@@ -13,10 +13,10 @@ import { BsCheck2, BsCircle } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { CgSandClock } from "react-icons/cg";
 
-import EditProfile from "./EditProfile";
-import TaskHistory from "./TaskHistory";
 
 import "./profile.styles.scss";
+import EditProfile from "../../components/EditProfile/EditProfile";
+import TaskHistory from "../../components/TaskHistory/TaskHistory";
 
 const initialCategories = {
   any: "any",
@@ -86,7 +86,7 @@ const Profile = () => {
                       setActiveCategory(initialCategories.any);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Any</p>
                   </li>
                   <li
@@ -99,7 +99,7 @@ const Profile = () => {
                       setActiveCategory(initialCategories.waste);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Paper waste</p>
                   </li>
                   <li
@@ -112,7 +112,7 @@ const Profile = () => {
                       setActiveCategory(initialCategories.sorting);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Sorting</p>
                   </li>
                   <li
@@ -125,7 +125,7 @@ const Profile = () => {
                       setActiveCategory(initialCategories.tech);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Tech</p>
                   </li>
                   <li
@@ -138,7 +138,7 @@ const Profile = () => {
                       setActiveCategory(initialCategories.flora);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Flora</p>
                   </li>
                   <li
@@ -151,7 +151,7 @@ const Profile = () => {
                       setActiveCategory(initialCategories.land);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Land</p>
                   </li>
                 </ul>

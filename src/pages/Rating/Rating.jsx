@@ -3,18 +3,16 @@ import React, { useState } from "react";
 import "./rating.styles.scss";
 import "../Profile/profile.styles.scss";
 
-import Dashboard from "./Dashboard";
 
 import { MdPersonOutline } from "react-icons/md";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
 import {
-  BiLockAlt,
   BiCategory,
-  BiLoaderCircle,
   BiChevronUp,
   BiChevronDown,
 } from "react-icons/bi";
+import Dashboard from "../../components/Dashboard/Dashboard";
 
 const initialCategories = {
   any: "any",
@@ -68,7 +66,7 @@ const Rating = () => {
                       setActiveDate(initialDates.current);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Current</p>
                   </li>
 
@@ -80,7 +78,7 @@ const Rating = () => {
                       setActiveDate(initialDates.lastWeek);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Last week</p>
                   </li>
                   <li
@@ -91,7 +89,7 @@ const Rating = () => {
                       setActiveDate(initialDates.lastMonth);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Last month</p>
                   </li>
                   <li
@@ -103,7 +101,7 @@ const Rating = () => {
                       setActiveDate(initialDates.lastYear);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Last year</p>
                   </li>
                 </ul>
@@ -148,7 +146,7 @@ const Rating = () => {
                       setActiveCategory(initialCategories.any);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Any</p>
                   </li>
                   <li
@@ -161,7 +159,7 @@ const Rating = () => {
                       setActiveCategory(initialCategories.waste);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Paper waste</p>
                   </li>
                   <li
@@ -174,7 +172,7 @@ const Rating = () => {
                       setActiveCategory(initialCategories.sorting);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Sorting</p>
                   </li>
                   <li
@@ -187,7 +185,7 @@ const Rating = () => {
                       setActiveCategory(initialCategories.tech);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Tech</p>
                   </li>
                   <li
@@ -200,7 +198,7 @@ const Rating = () => {
                       setActiveCategory(initialCategories.flora);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Flora</p>
                   </li>
                   <li
@@ -213,7 +211,7 @@ const Rating = () => {
                       setActiveCategory(initialCategories.land);
                     }}
                   >
-                    <div></div>
+                    <div/>
                     <p>Land</p>
                   </li>
                 </ul>
