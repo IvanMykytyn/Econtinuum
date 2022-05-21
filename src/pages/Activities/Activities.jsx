@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./styles/activities.styles.scss";
 
-import { LeftSideLine } from "./styles/images";
+import { LeftSideLines } from "./styles/images";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -17,7 +17,7 @@ const Activities = ({ hidden, isLoading, loadActivitiesList }) => {
     <div className="main-box">
       <div className="title-box">
         <div>
-          <h1>Categories choice</h1>
+          <h1>Categories</h1>
           <p>Choose your category to start helping our planet</p>
         </div>
       </div>
@@ -30,12 +30,12 @@ const Activities = ({ hidden, isLoading, loadActivitiesList }) => {
         <hr />
       </div>
       <div className="additional-info">
-        <img src={LeftSideLine} alt="left side line" />
+        <img src={LeftSideLines} alt="left-side-lines" />
         <div className="text-info">
           <h1>Don’t know what to do? </h1>
           <p>
             If you’re a newby to our project, please watch some tutorial videos
-            or read some additional information on{" "}
+            or read some additional information on
             <Link className="tutorial-link" to="/tutorial">
               Tutorial page.
             </Link>
