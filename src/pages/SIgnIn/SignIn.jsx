@@ -15,6 +15,8 @@ import {
 } from "../../redux/auth/auth.actions";
 import { connect } from "react-redux";
 import axios from "axios";
+import { GoogleLogin } from "react-google-login";
+
 const SignIn = ({
   signInRequest,
   resetErrorMessage,
@@ -46,11 +48,27 @@ const SignIn = ({
     }
     return isValid;
   };
-  const handleOAuth = async () => {
+  const handleOAuth = async (googleData) => {
     try {
-      const res = await axios.get("http://localhost:3000/auth/google");
-      const { redirectUrl } = res.data;
-      window.location.href = redirectUrl;
+      // write data to db
+      // https://eco-project-back-end.herokuapp.com/auth/google
+      const res = await axios.post("http://localhost:3000/auth/google", {
+        token: googleData.tokenId,
+      });
+
+      // get data back
+      const data = res.data;
+
+      const user = {
+        id: data._id,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        token: data.token,
+      };
+
+      setErrors({});
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -103,9 +121,20 @@ const SignIn = ({
             Sign in
           </CustomButton>
           <p className="sign-in__text-or">or</p>
-          <CustomButton googleButton onClick={handleOAuth}>
-            Sign in with google
-          </CustomButton>
+          <GoogleLogin
+            clientId={process.env.GOOGLE_CLIENT_ID}
+            render={(renderProps) => (
+              <CustomButton
+                googleButton
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                Sign up with Google
+              </CustomButton>
+            )}
+            onSuccess={handleOAuth}
+            onFailure={handleOAuth}
+          />
         </form>
 
         <div className="sign-form__link">

@@ -14,6 +14,7 @@ import { validateInput } from "../../utils/SignUp/validateInput";
 import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
 import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
 import axios from "axios";
+import { GoogleLogin } from "react-google-login";
 
 const SignUp = ({
   signUpRequest,
@@ -50,16 +51,35 @@ const SignUp = ({
     }
     setErrors({ ...errors, [name]: "" });
   };
-  const handleOAuth = async () => {
+
+  const handleOAuth = async (googleData) => {
     try {
-      // https://eco-project-back-end.herokuapp.com/profile
-      const res = await axios.get("http://localhost:3000/auth/google");
-      const { redirectUrl } = res.data;
-      window.location.href = redirectUrl;
+      // write data to db
+      // https://eco-project-back-end.herokuapp.com/auth/google
+      const res = await axios.post("http://localhost:3000/auth/google", {
+        token: googleData.tokenId,
+      });
+
+      // get data back
+      const data = res.data;
+
+      const user = {
+        id: data._id,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        token: data.token,
+      };
+
+      // console.log(user);
+
+      setErrors({});
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
+
   const isValid = () => {
     const { errors, isValid } = validateInput(user);
     if (!isValid) {
@@ -79,6 +99,7 @@ const SignUp = ({
         email: user.email,
         password: user.password.toString(),
       };
+
       const result = await signUpRequest(send_user);
 
       if (result) {
@@ -183,13 +204,24 @@ const SignUp = ({
               Sign up
             </CustomButton>
             <div className="signup-form__text">or</div>
-            <CustomButton googleButton onClick={handleOAuth}>
-              Sign up with Google
-            </CustomButton>
+            <GoogleLogin
+              clientId={process.env.clientId}
+              render={(renderProps) => (
+                <CustomButton
+                  googleButton
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  Sign up with Google
+                </CustomButton>
+              )}
+              onSuccess={handleOAuth}
+              onFailure={handleOAuth}
+            />
           </div>
         </form>
         <p className="signup__description">
-          Already have an account?{" "}
+          Already have an account?
           <Link className="signup__link" to={"/sign-in"}>
             Sign in
           </Link>
