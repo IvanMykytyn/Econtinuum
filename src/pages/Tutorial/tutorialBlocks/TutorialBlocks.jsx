@@ -15,8 +15,8 @@ const TutorialBlocks = () => {
         id="garbage-sorting"
         img={GarbageIcon}
         title="Garbage sorting"
-        description="hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd "
-        importantText="Some important information"
+        description="Waste sorting is collected through curbside collection schemes or automatically separated in recovery facilities"
+        importantText="Only 9% of all the garbage are sorted"
         count_of_stars={3}
         reverse={true}
         moreLink="/"
@@ -26,8 +26,8 @@ const TutorialBlocks = () => {
         id="paper-waste"
         img={TelegramsIcon}
         title="Paper waste sale"
-        description="rehewrh ehewrh ehewrh ehewrh ehewrh ehewrh ehewrh ehewrh ehewrh ehewrh ehewrh ehewrh"
-        importantText="Some important information"
+        description="Paper is sold to the cardboard industries, where the waste is processed to create new products"
+        importantText=" 14% of deforestation is done to produce paper"
         count_of_stars={4}
         reverse={false}
         moreLink="/"
@@ -36,7 +36,7 @@ const TutorialBlocks = () => {
       <BlockType3
         id="plant-flora"
         title="Plant some flora"
-        description="hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd "
+        description="We are youth on a mission: bring back a trillion trees! No matter where you are, it's never been easier to plant trees"
         count_of_stars={3}
         reverse={false}
         moreLink="/"
@@ -46,8 +46,8 @@ const TutorialBlocks = () => {
         id="clean-land"
         img={ParkIcon}
         title="Clean a patch of land"
-        description="egwgw wgrew  egwgw wgrew egwgw wgrew egwgw wgrew egwgw wgrew egwgw wgrew "
-        importantText="Some important information"
+        description="Grounds require cleaning and other necessary maintenance works for it to sustain as time passes by"
+        importantText="75% of Earth's land areas are degraded"
         count_of_stars={5}
         reverse={false}
         moreLink="/"
@@ -56,7 +56,7 @@ const TutorialBlocks = () => {
       <BlockType3
         id="saving-tech"
         title="Saving tech"
-        description="hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd hsdhsd "
+        description="Some of the technologies  can help you reduce your energy consumption by as much as 80%"
         count_of_stars={2}
         reverse={false}
         moreLink="/"

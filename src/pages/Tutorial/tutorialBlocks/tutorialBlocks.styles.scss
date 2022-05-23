@@ -6,7 +6,7 @@ $blockSecondColor: white;
   background-color: $additionalInfoBgColor;
 
   border-radius: 50px;
-  height: 1200px;
+  height: 1300px;
 
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -245,7 +245,7 @@ $blockSecondColor: white;
   width: 180px;
   height: 180px;
 
-  padding: 35px 20px;
+  padding: 15px 20px;
   border-radius: 36px;
 
   position: absolute;
@@ -256,6 +256,8 @@ $blockSecondColor: white;
     font-size: 26px;
     color: black;
   }
+  display: flex;
+  align-items: center;
 }
 .block-type-1 {
   .important-box {
@@ -267,5 +269,8 @@ $blockSecondColor: white;
 .block-type-2 {
   .important-box {
     right: 50px;
+    p {
+      font-size: 22px;
+    }
   }
 }

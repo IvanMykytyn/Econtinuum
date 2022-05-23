@@ -42,11 +42,9 @@ const Activities = ({ hidden, isLoading, loadActivitiesList }) => {
           </p>
           <h1>We accept your advice!</h1>
           <p>
-            If you’re a newby to our project If you’re a newby to our project If
-            you’re a newby to our project If you’re a newby to our project If
-            you’re a newby to our projectIf you’re a newby to our project If
-            you’re a newby to our project If you’re a newby to our project If
-            you’re a newby to our project
+            If you have any ideas on how to improve our project, or what
+            activities we should add in the future, the tell us your wishes
+            using our contacts or social media below.
           </p>
         </div>
       </div>
