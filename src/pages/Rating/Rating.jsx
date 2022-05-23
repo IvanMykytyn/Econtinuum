@@ -13,7 +13,6 @@ import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 
 const Rating = () => {
 
-
   const [showMe, setShowMe] = useState(false);
 
   return (
@@ -21,7 +20,6 @@ const Rating = () => {
       <nav>
         <div className="filter-box">
           <ul>
-
             <li className="show-me-section">
               <div
                 className={"show-me-title" + (showMe ? " active-show-me" : "")}
