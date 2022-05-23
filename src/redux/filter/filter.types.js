@@ -1,0 +1,4 @@
+export const FilterTypes = {
+    SET_CATEGORY_FILTER:'SET_CATEGORY_FILTER',
+    SET_STATUS_FILTER:'SET_STATUS_FILTER',
+}

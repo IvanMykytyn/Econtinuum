@@ -7,27 +7,22 @@ import {ClipIcon, LocationIcon, NumbersIcon, PlanetIcon} from "../../pages/Activ
 import FormInput from "../FormInput/FormInput";
 import {connect} from "react-redux";
 import {closeActivityForm, requestActivityForm} from "../../redux/activityForm/activityForm.actions";
-import {useNavigate} from "react-router-dom";
 
 const ActivitiesForm = ({closeForm, activity, sendForm}) => {
-    const navigate = useNavigate()
-    const [errors, setErrors] = useState('')
-    const [form, setForm] = useState({
-        description: '',
-        photos: ''
-    })
+    const [errors, setErrors] = useState({})
+    const [description, setDescription] = useState('')
     const [number, setNumber] = useState(0)
     const [fileByteArray, setFileByteArray] = useState([])
 
     const handleFileValidation = (event) => {
-
+        console.log('here')
         const allowedExtension = /(\.jpg|\.jpeg|\.png|\.gif)$/i
         if (!allowedExtension.exec(event.target.value)) {
             event.target = ''
-            setErrors('Invalid file type')
+            setErrors({...errors, photos: 'Invalid file type'})
             return false
         }
-
+        setErrors({...errors, photos: ''})
         const byteArray = [];
         const reader = new FileReader();
         reader.readAsArrayBuffer(event.target.files[0]);
@@ -38,17 +33,29 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
                 for (const a of array) {
                     byteArray.push(a);
                 }
-                setFileByteArray([...fileByteArray, {type: "Buffer", data: [...byteArray]}])
-                setErrors('')
+                const byte = byteArray.map(item => item.toString("base64"))
+                setFileByteArray([...fileByteArray, {type: "Buffer", data: [...byte]}])
+
             }
         }
 
     }
     const handleSubmit = (event) => {
         event.preventDefault()
+        if (!number || !errors.photos) {
+            console.log(fileByteArray)
+            if (!number) {
+                setErrors(prevErrors => ({...prevErrors, number: 'required'}))
+            }
+
+            if (fileByteArray.length === 0) {
+                setErrors(prevErrors => ({...prevErrors, photos: 'required'}))
+            }
+            return
+        }
         const sendObject = {
-            activity_type: String(activity.type),
-            users_task_description: form.description,
+            activity_type: activity.type,
+            users_task_description: description,
             numerical_indicators: +number,
             location: 'SFSFA2312312231',
             photos: fileByteArray,
@@ -58,11 +65,10 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
         sendForm(sendObject)
         closeForm()
 
-        navigate('/profile')
     }
     const handleChange = ({target: {name, value}}) => {
-        setForm({...sendForm, [name]: value})
-
+        setDescription(value)
+        setErrors({...errors, [name]: ''})
     }
     const {title, number_of_points, unit_of_measure} = activity
     return (
@@ -93,7 +99,7 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
                         <label htmlFor="photo" className="custom-file-upload">
                             <span className='photo__text'>Attach photos</span>
                             <FormInput
-                                error={errors}
+                                error={errors.photos}
                                 type='file'
                                 id='photo'
                                 label='Attach photos'
@@ -108,22 +114,25 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
                         <FormInput
                             name="number"
                             type="number"
-
+                            error={errors.number}
                             label="Number"
                             value={number}
-                            onChange={(e) => setNumber(e.target.value)}
+                            onChange={(e) => {
+
+                                setNumber(e.target.value)
+                            }}
                         />
                     </div>
                     <div className="description-input">
                          <textarea
                              name="description"
                              placeholder="Description"
-                             value={form.description}
+                             value={description}
                              onChange={handleChange}
                          />
                     </div>
                     <div className="confirm-button">
-                        <button disabled={errors} type="submit">Confirm</button>
+                        <button type="submit">Confirm</button>
                     </div>
                 </form>
             </div>

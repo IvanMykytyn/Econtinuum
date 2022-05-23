@@ -6,14 +6,16 @@ import './edit-profile.styles.scss'
 import ProfileCustomButton from "../ProfileCustomButton/ProfileCustomButton";
 import {connect} from "react-redux";
 import {validateInput} from "../../utils/SignUp/validateInput";
-import {editUserRequest} from "../../redux/editProfile/editProfile.actions";
+import {editUserRequest, tasksDoneRequest} from "../../redux/editProfile/editProfile.actions";
 
-const EditProfile = ({userObject,editUserRequest}) => {
+const EditProfile = ({userObject,editUserRequest,tasksDoneRequest,tasksDone}) => {
     useEffect(() => {
         if (userObject) {
             setUser(convertJSONUserToObject(userObject))
         }
+        tasksDoneRequest()
     }, [userObject])
+
     const convertJSONUserToObject = (user) => {
 
         const date = user.date_of_birth.split('-')
@@ -29,7 +31,6 @@ const EditProfile = ({userObject,editUserRequest}) => {
             points: user.points
         }
     }
-    const countOfCompletedTask = 15;
     const [errors, setErrors] = useState({})
     const [edit, setEdit] = useState(true);
     const [user, setUser] = useState({
@@ -81,7 +82,7 @@ const EditProfile = ({userObject,editUserRequest}) => {
                         Your score: <span>{user.points}</span> points
                     </h4>
                     <h4>
-                        Tasks done: <span>{countOfCompletedTask}</span>
+                        Tasks done: <span>{tasksDone}</span>
                     </h4>
                 </div>
             </div>
@@ -199,9 +200,14 @@ const EditProfile = ({userObject,editUserRequest}) => {
     )
 }
 const mapStateToProps = state => ({
-    userObject: state.auth.userObject
+    userObject: state.auth.userObject,
+    countOfDoneTasks: state.tasksHistory.tasks.length,
+    tasksDone:state.editProfile.tasksDone
 })
+
+
 const mapDispatchToProps = dispatch => ({
-    editUserRequest: (user) => dispatch(editUserRequest(user))
+    editUserRequest: (user) => dispatch(editUserRequest(user)),
+    tasksDoneRequest: () => dispatch(tasksDoneRequest())
 })
 export default connect(mapStateToProps,mapDispatchToProps)(EditProfile)

@@ -1,12 +1,13 @@
 import React from "react";
 
 import './header.styles.scss'
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {userLogoutRequest} from "../../redux/auth/auth.actions";
 import Logo from "../_common/Logo/Logo";
 
 const Header = ({user,userLogout}) => {
+    const navigate = useNavigate()
     return (
         <header className="header">
             <div className='header-content'>
@@ -26,7 +27,10 @@ const Header = ({user,userLogout}) => {
                     ?
                     <>
                         <NavLink to='/profile' className="header-auth__signup">Profile</NavLink>
-                        <div className="header-auth__signin" onClick={userLogout}>Log out</div>
+                        <div className="header-auth__signin" onClick={()=>{
+                            userLogout()
+                            navigate('/')
+                        }}>Log out</div>
                     </>
                     :
                     <>

@@ -1,116 +1,42 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./dashboard.styles.scss";
 import RatingList from "../RatingList/RatingList";
+import {requestLoadRatingList,  setRatingSortBy} from "../../redux/rating/rating.actions";
+import {connect} from "react-redux";
 
-const tasks = [
-    {
-        place: 1,
-        fullName: "M. Tsarynskyi",
-        points: 100,
-        tasksDone: 123,
-        favorite: "Flora",
-    },
-    {
-        place: 2,
-        fullName: "O. Klymko",
-        points: 70,
-        tasksDone: 14,
-        favorite: "Land",
-    },
-    {
-        place: 3,
-        fullName: "D. Semtso",
-        points: 56,
-        tasksDone: 7,
-        favorite: "Flora",
-    },
-    {
-        place: 4,
-        fullName: "I. Mykytyn",
-        points: 18,
-        tasksDone: 6,
-        favorite: "Sorting",
-    },
-    {
-        place: 5,
-        fullName: "H. Hrybuy",
-        points: 9,
-        tasksDone: 3,
-        favorite: "Tech",
-    },
-    {
-        place: 6,
-        fullName: "O. Klymko",
-        points: 70,
-        tasksDone: 14,
-        favorite: "Land",
-    },
-    {
-        place: 7,
-        fullName: "O. Klymko",
-        points: 70,
-        tasksDone: 14,
-        favorite: "Land",
-    },
-    {
-        place: 8,
-        fullName: "O. Klymko",
-        points: 70,
-        tasksDone: 14,
-        favorite: "Land",
-    },
-    {
-        place: 9,
-        fullName: "O. Klymko",
-        points: 70,
-        tasksDone: 14,
-        favorite: "Land",
-    },
-    {
-        place: 10,
-        fullName: "O. Klymko",
-        points: 70,
-        tasksDone: 14,
-        favorite: "Land",
-    },
-];
 
 const initialFilter = {
     points: "points",
-    quantity: "quantity",
-    topInTheActivity: "top in the activity",
+    quantity: "count_of_tasks",
+
 };
 
-const Dashboard = ({}) => {
-    const [dashboardFilter, setDashboardFilter] = useState(initialFilter.points);
+const Dashboard = ({ loadRating, setRatingSortBy, sortBy}) => {
+    const [isTopInTheActivity,setIsTopInTheActivity] = useState(false)
+
+    useEffect(() => {
+        loadRating()
+    }, [loadRating])
 
     return (
         <div className="dashboard">
             <h1>Current</h1>
             <div className="filter-buttons">
                 <button
-                    className={
-                        dashboardFilter === initialFilter.points ? "active-filter" : ""
-                    }
-                    onClick={() => setDashboardFilter(initialFilter.points)}
+                    className={sortBy === initialFilter.points ? "active-filter" : ""}
+                    onClick={() => setRatingSortBy(initialFilter.points)}
                 >
                     Points
                 </button>
                 <button
-                    className={
-                        dashboardFilter === initialFilter.quantity ? "active-filter" : ""
-                    }
-                    onClick={() => setDashboardFilter(initialFilter.quantity)}
+                    className={sortBy === initialFilter.quantity ? "active-filter" : ""}
+                    onClick={() => setRatingSortBy(initialFilter.quantity)}
                 >
                     Quantity
                 </button>
                 <button
-                    className={
-                        dashboardFilter === initialFilter.topInTheActivity
-                            ? "active-filter"
-                            : ""
-                    }
-                    onClick={() => setDashboardFilter(initialFilter.topInTheActivity)}
+                    className={isTopInTheActivity  ? "active-filter" : ""}
+                    onClick={() => setIsTopInTheActivity(!isTopInTheActivity)}
                 >
                     Top in the activity
                 </button>
@@ -124,10 +50,20 @@ const Dashboard = ({}) => {
                     <p>Tasks done</p>
                     <p>Favorite</p>
                 </div>
-                <RatingList usersList={tasks}/>
+                <RatingList isTopInTheActivity={isTopInTheActivity}/>
             </div>
         </div>
     );
 };
 
-export default Dashboard;
+const mapDispatchToProps = dispatch => ({
+    loadRating: () => dispatch(requestLoadRatingList()),
+    setRatingSortBy: (option) => dispatch(setRatingSortBy(option))
+})
+
+const mapStateToProps = state => ({
+    isFetching: state.rating.isFetching,
+    sortBy: state.rating.sortBy
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -21,8 +21,9 @@ import {
   LayersIcon,
 } from "./images";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
-const LandingPage = () => {
+const LandingPage = ({user}) => {
   return (
     <main className="landing-page-content">
       <div className="landing-title-box">
@@ -42,7 +43,11 @@ const LandingPage = () => {
             viverra at felis.
           </p>
           <div className="sign-up-now">
-            <Link to={'/sign-up'}>sign up now</Link>
+            {
+              user
+                  ? <Link to={'/profile'}>go to profile</Link>
+                  : <Link to={'/sign-up'}>sign up now</Link>
+            }
             <IoIosArrowDroprightCircle size={24} color={"#FFFFFF66"} />
           </div>
         </div>
@@ -161,5 +166,7 @@ const LandingPage = () => {
     </main>
   );
 };
-
-export default LandingPage;
+const mapStateToProps = state => ({
+  user: state.auth.userObject
+})
+export default connect(mapStateToProps)(LandingPage);
