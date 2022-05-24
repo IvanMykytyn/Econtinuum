@@ -46,6 +46,8 @@
     gap: 12px;
     cursor: pointer;
     padding: 6px 20px;
+
+    animation: list_animation 0.5s forwards;
   }
 
   .active-category {
@@ -53,4 +55,20 @@
 
     border-radius: 18px;
   }
+}
+#status-any {
+  opacity: 0;
+  animation-delay: 0s;
+}
+#status-success {
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+#status-failed {
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+#status-validating {
+  opacity: 0;
+  animation-delay: 0.6s;
 }
