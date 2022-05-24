@@ -37,19 +37,37 @@ export function userSignUpRequest(userData) {
   };
 }
 
-export function userSignUpRequestViaGoogle(userData) {
-  return (dispatch) => {
+export function userSignRequestViaGoogle(googleData) {
+  return async (dispatch) => {
     let result = false;
     dispatch(authRequestStart());
-    try {
-      result = true;
-      localStorage.setItem("user", JSON.stringify(userData));
-      dispatch(authRequestSuccess(userData));
-    } catch (errorObject) {
-      dispatch(authRequestFailure(errorObject.response.data));
-      result = false;
-    }
 
+    await axios
+      // write data to db
+      .post("https://eco-project-back-end.herokuapp.com/auth/google", {
+        token: googleData.tokenId,
+      })
+      .then((userData) => {
+        result = true;
+
+        // get data back
+        const data = userData.data;
+
+        const user = {
+          id: data._id,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          token: data.token,
+        };
+
+        localStorage.setItem("user", JSON.stringify(user));
+        dispatch(authRequestSuccess(user));
+      })
+      .catch((errorObject) => {
+        dispatch(authRequestFailure(errorObject.response.data));
+        result = false;
+      });
     return result;
   };
 }

@@ -12,6 +12,7 @@ import { validateInput } from "../../utils/SignIn/validateInput";
 import {
   authFailureReset,
   userSignInRequest,
+  userSignRequestViaGoogle,
 } from "../../redux/auth/auth.actions";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -20,6 +21,8 @@ import { GoogleLogin } from "react-google-login";
 const SignIn = ({
   signInRequest,
   resetErrorMessage,
+  signRequestViaGoogle,
+
   auth: { isLoading, errorMessage },
 }) => {
   const navigate = useNavigate();
@@ -48,31 +51,19 @@ const SignIn = ({
     }
     return isValid;
   };
+
   const handleOAuth = async (googleData) => {
     try {
-      // write data to db
-      // https://eco-project-back-end.herokuapp.com/auth/google
-      const res = await axios.post("http://localhost:3000/auth/google", {
-        token: googleData.tokenId,
-      });
-
-      // get data back
-      const data = res.data;
-
-      const user = {
-        id: data._id,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        token: data.token,
-      };
-
-      setErrors({});
-      navigate("/");
+      const result = await signRequestViaGoogle(googleData);
+      if (result) {
+        setErrors({});
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isValid()) {
@@ -150,6 +141,7 @@ const SignIn = ({
 
 const mapDispatchToProps = (dispatch) => ({
   signInRequest: (data) => dispatch(userSignInRequest(data)),
+  signRequestViaGoogle: (user) => dispatch(userSignRequestViaGoogle(user)),
   resetErrorMessage: () => dispatch(authFailureReset()),
 });
 const mapStateToProps = (state) => ({

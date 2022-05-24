@@ -8,7 +8,7 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import {
   authFailureReset,
   userSignUpRequest,
-  userSignUpRequestViaGoogle,
+  userSignRequestViaGoogle,
 } from "../../redux/auth/auth.actions";
 import { connect } from "react-redux";
 import { validateInput } from "../../utils/SignUp/validateInput";
@@ -19,7 +19,7 @@ import { GoogleLogin } from "react-google-login";
 
 const SignUp = ({
   signUpRequest,
-  signUpRequestViaGoogle,
+  signRequestViaGoogle,
   resetErrorMessage,
   auth: { isLoading, errorMessage },
 }) => {
@@ -56,25 +56,7 @@ const SignUp = ({
 
   const handleOAuth = async (googleData) => {
     try {
-      // write data to db
-      // https://eco-project-back-end.herokuapp.com/auth/google
-      const res = await axios.post("http://localhost:3000/auth/google", {
-        token: googleData.tokenId,
-      });
-
-      // get data back
-      const data = res.data;
-
-      const user = {
-        id: data._id,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        token: data.token,
-      };
-
-      const result = await signUpRequestViaGoogle(user);
-
+      const result = await signRequestViaGoogle(googleData);
       if (result) {
         setErrors({});
         navigate("/");
@@ -209,9 +191,7 @@ const SignUp = ({
             </CustomButton>
             <div className="signup-form__text">or</div>
             <GoogleLogin
-              clientId={
-                "1082923325369-fl0l9enjil6fbp6o8bh73e1s7vtn0l5p.apps.googleusercontent.com"
-              }
+              clientId={process.env.GOOGLE_CLIENT_ID}
               render={(renderProps) => (
                 <CustomButton
                   googleButton
@@ -239,7 +219,7 @@ const SignUp = ({
 
 const mapDispatchToProps = (dispatch) => ({
   signUpRequest: (user) => dispatch(userSignUpRequest(user)),
-  signUpRequestViaGoogle: (user) => dispatch(userSignUpRequestViaGoogle(user)),
+  signRequestViaGoogle: (user) => dispatch(userSignRequestViaGoogle(user)),
   resetErrorMessage: () => dispatch(authFailureReset()),
 });
 
