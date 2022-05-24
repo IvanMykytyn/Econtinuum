@@ -61,6 +61,7 @@ const SignUp = ({
       const res = await axios.post("http://localhost:3000/auth/google", {
         token: googleData.tokenId,
       });
+
       // get data back
       const data = res.data;
 
@@ -72,10 +73,8 @@ const SignUp = ({
         token: data.token,
       };
 
-      // doesn't work
       const result = await signUpRequestViaGoogle(user);
 
-      console.log(result);
       if (result) {
         setErrors({});
         navigate("/");
@@ -240,7 +239,7 @@ const SignUp = ({
 
 const mapDispatchToProps = (dispatch) => ({
   signUpRequest: (user) => dispatch(userSignUpRequest(user)),
-  SignUpRequestViaGoogle: (user) => dispatch(userSignUpRequestViaGoogle(user)),
+  signUpRequestViaGoogle: (user) => dispatch(userSignUpRequestViaGoogle(user)),
   resetErrorMessage: () => dispatch(authFailureReset()),
 });
 

@@ -38,7 +38,6 @@ export function userSignUpRequest(userData) {
 }
 
 export function userSignUpRequestViaGoogle(userData) {
-  console.log("tech");
   return (dispatch) => {
     let result = false;
     dispatch(authRequestStart());
