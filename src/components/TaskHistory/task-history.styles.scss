@@ -25,13 +25,31 @@
   gap: 10px;
 
   .table-header {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
     margin: 5px 10px 5px 50px;
     p {
       font-weight: 600;
       font-size: 25px;
       color: #555461;
+    }
+
+    p.table-header-id {
+      text-align: left;
+    }
+    p.table-header-points {
+      text-align: left;
+      margin-left: 15px;
+    }
+    p.table-header-status {
+      // text-align: right;
+      margin-left: 15px;
+    }
+    p.table-header-category {
+      text-align: right;
     }
   }
   .task-item {
@@ -47,12 +65,12 @@
       text-align: center;
     }
     .task-points p {
-      min-width: 20px;
+      min-width: 80px;
       font-family: "Gilroy", sans-serif;
       font-style: normal;
 
       font-weight: 400;
-      font-size: 21px;
+      font-size: 21.5px;
       margin-right: 40px;
     }
     .task-id p {

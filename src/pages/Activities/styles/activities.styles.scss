@@ -3,15 +3,15 @@ $separateHrColor: #556748;
 $taskBgColor: #d9ebcc;
 $additionalInfoBgColor: #c3d7a8;
 
-.main-box {
+.categories-main-box {
   min-height: 100vh;
   padding-top: 60px;
   background-color: $bgColor;
   position: relative;
 
   .title-box {
-    height: 650px;
-    background: url("images/title-bg.png") 0 0 / 100% auto no-repeat;
+    height: 100vh;
+    background: url("images/title-bg.png") 0 0 / 100% 100% no-repeat;
 
     div {
       height: 100%;
@@ -64,7 +64,7 @@ $additionalInfoBgColor: #c3d7a8;
     }
   }
 }
-.main-box {
+.categories-main-box {
   .additional-info {
     background-color: $additionalInfoBgColor;
 

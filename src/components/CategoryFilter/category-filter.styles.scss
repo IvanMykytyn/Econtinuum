@@ -1,9 +1,8 @@
 .category-section {
-  // margin-bottom: 15px;
+  margin-bottom: 10px;
   .category-title {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
 
     cursor: pointer;
 
@@ -28,6 +27,7 @@
   }
 
   .category-list {
+    margin-top: 15px;
     p {
       font-family: "Gilroy", sans-serif;
       font-style: normal;

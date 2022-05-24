@@ -16,14 +16,14 @@ const TaskHistory = ({
   }, [categoryFilter, statusFilter]);
 
   return (
-    <div className="task-history">
+    <div className="task-history" id="task-history">
       <h1>Task history</h1>
       <div className="task-table">
         <div className="table-header">
-          <p>ID</p>
-          <p>Points</p>
-          <p>Status</p>
-          <p>Category</p>
+          <p className="table-header-id">ID</p>
+          <p className="table-header-points">Points</p>
+          <p className="table-header-status">Status</p>
+          <p className="table-header-category">Category</p>
         </div>
         <TaskHistoryList isLoading={isLoading} />
       </div>

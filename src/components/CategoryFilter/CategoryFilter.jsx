@@ -20,6 +20,7 @@ const CategoryFilter = ({ setCategoryFilter, categorySelectedOption }) => {
     <li className="category-section">
       <div
         className="category-title"
+        style={{ cursor: "pointer" }}
         onClick={() => setCategoryList(!categoryList)}
       >
         <div>
@@ -58,7 +59,7 @@ const CategoryFilter = ({ setCategoryFilter, categorySelectedOption }) => {
             }}
           >
             <div />
-            <p>Paper waste</p>
+            <p>Waste</p>
           </li>
           <li
             id="category-sorting"

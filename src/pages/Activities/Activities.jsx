@@ -14,7 +14,7 @@ const Activities = ({ hidden, isLoading, loadActivitiesList }) => {
     loadActivitiesList();
   }, [loadActivitiesList]);
   return (
-    <div className="main-box">
+    <div className="categories-main-box">
       <div className="title-box">
         <div>
           <h1>Categories</h1>
