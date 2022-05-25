@@ -4,7 +4,8 @@ const INITIAL_STATE = {
     isFetching: false,
     ratingList: [],
     errorMessage: null,
-    sortBy:'points'
+    sortBy:'points',
+    showMe:null
 }
 
 export const ratingReducer = (state = INITIAL_STATE, action) => {
@@ -31,6 +32,11 @@ export const ratingReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 sortBy: action.payload
+            }
+        case RatingTypes.SHOW_ME_IN_LIST:
+            return {
+                ...state,
+                showMe:action.payload
             }
         default:
             return state
