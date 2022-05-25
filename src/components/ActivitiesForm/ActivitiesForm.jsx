@@ -23,7 +23,6 @@ const ActivitiesForm = ({ closeForm, activity, sendForm }) => {
   const [fileByteArray, setFileByteArray] = useState([]);
 
   const handleFileValidation = (event) => {
-    console.log("here");
     const allowedExtension = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
     if (!allowedExtension.exec(event.target.value)) {
       event.target = "";
@@ -52,7 +51,6 @@ const ActivitiesForm = ({ closeForm, activity, sendForm }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!number || !errors.photos) {
-      console.log(fileByteArray);
       if (!number) {
         setErrors((prevErrors) => ({ ...prevErrors, number: "required" }));
       }
