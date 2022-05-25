@@ -3,10 +3,11 @@ $darkFormColor: #484b67;
 $formTextColor: #8f8c9c;
 
 .form-bg {
-
   background-color: rgba(0, 0, 0, 0.65);
   position: fixed;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100vh;
 
@@ -17,15 +18,17 @@ $formTextColor: #8f8c9c;
 
 }
 
+
 .form-box {
   background-color: $lightFormColor;
 
-  height: 75vh;
-  margin: 120px 180px 30px;
-
+  margin-top: 50px;
+  height: 630px;
+  width: 1064px;
   border-radius: 41px;
 
   display: flex;
+
   position: relative;
 
   .close-icon {
@@ -202,4 +205,10 @@ $formTextColor: #8f8c9c;
 
 .active-form {
   display: block;
+}
+.form-fields .loc input{
+  font-size: 20px;
+}
+.form-fields .number input{
+  font-size: 20px;
 }

@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 
-
 import './activities-form.styles.scss'
 import {IoClose} from "react-icons/io5";
 import {ClipIcon, LocationIcon, NumbersIcon, PlanetIcon} from "../../pages/Activities/styles/images";
@@ -9,13 +8,17 @@ import {connect} from "react-redux";
 import {closeActivityForm, requestActivityForm} from "../../redux/activityForm/activityForm.actions";
 
 const ActivitiesForm = ({closeForm, activity, sendForm}) => {
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({
+        number: '',
+        photos: '',
+    })
     const [description, setDescription] = useState('')
     const [number, setNumber] = useState(0)
-    const [fileByteArray, setFileByteArray] = useState([])
+    const [fileByteArray, setFileByteArray] = useState(false)
+    const [location,setLocation] = useState('')
+    const reader = new FileReader();
 
     const handleFileValidation = (event) => {
-        console.log('here')
         const allowedExtension = /(\.jpg|\.jpeg|\.png|\.gif)$/i
         if (!allowedExtension.exec(event.target.value)) {
             event.target = ''
@@ -24,17 +27,18 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
         }
         setErrors({...errors, photos: ''})
         const byteArray = [];
-        const reader = new FileReader();
+
         reader.readAsArrayBuffer(event.target.files[0]);
         reader.onloadend = (evt) => {
             if (evt.target.readyState === FileReader.DONE) {
+
                 const arrayBuffer = evt.target.result,
                     array = new Uint8Array(arrayBuffer);
                 for (const a of array) {
                     byteArray.push(a);
                 }
-                const byte = byteArray.map(item => item.toString("base64"))
-                setFileByteArray([...fileByteArray, {type: "Buffer", data: [...byte]}])
+                // const byte = byteArray.map(item => item.toString())
+                setFileByteArray(true)
 
             }
         }
@@ -42,13 +46,11 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
     }
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (!number || !errors.photos) {
-            console.log(fileByteArray)
+        if (!number || !fileByteArray) {
             if (!number) {
                 setErrors(prevErrors => ({...prevErrors, number: 'required'}))
             }
-
-            if (fileByteArray.length === 0) {
+            if (!fileByteArray) {
                 setErrors(prevErrors => ({...prevErrors, photos: 'required'}))
             }
             return
@@ -57,14 +59,19 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
             activity_type: activity.type,
             users_task_description: description,
             numerical_indicators: +number,
-            location: 'SFSFA2312312231',
-            photos: fileByteArray,
+            location: location,
+            photos: [{type: "Buffer", data: []}],
             token: JSON.parse(localStorage.getItem('user')).token
         }
-
+        console.log(sendObject)
         sendForm(sendObject)
         closeForm()
 
+    }
+    const handleClickOutside = (event) => {
+        if (event.target.className === 'form-bg') {
+            closeForm()
+        }
     }
     const handleChange = ({target: {name, value}}) => {
         setDescription(value)
@@ -72,7 +79,7 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
     }
     const {title, number_of_points, unit_of_measure} = activity
     return (
-        <div className={"form-bg"}>
+        <div className={"form-bg"} onClick={handleClickOutside}>
             <div className="form-box">
                 <IoClose
                     size={45}
@@ -90,9 +97,18 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
                     <img src={PlanetIcon} alt='PlanetIcon'/>
                 </div>
                 <form className="form-fields" onSubmit={handleSubmit}>
-                    <div className="location">
+                    <div className="number loc">
                         <img src={LocationIcon} alt='LocationIcon'/>
-                        <p>Location</p>
+                        <FormInput
+                            error={errors.location}
+                            type='text'
+                            id='location'
+                            label='Location'
+                            onChange={(e)=>setLocation(e.target.value)}
+                            name='location'
+                            value={location}
+
+                        />
                     </div>
                     <div className="photos">
                         <img src={ClipIcon} alt='ClipIcon'/>
@@ -118,7 +134,6 @@ const ActivitiesForm = ({closeForm, activity, sendForm}) => {
                             label="Number"
                             value={number}
                             onChange={(e) => {
-
                                 setNumber(e.target.value)
                             }}
                         />

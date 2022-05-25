@@ -6,23 +6,39 @@ export const startLoadRatingList = () => ({
 })
 export const successLoadRatingList = (data) => ({
     type: RatingTypes.SUCCESS_LOAD_LIST,
-    payload:data
+    payload: data
+})
+export const showMeInList = (data) => ({
+    type: RatingTypes.SHOW_ME_IN_LIST,
+    payload: data
 })
 export const failureLoadRatingList = (error) => ({
     type: RatingTypes.FAILURE_LOAD_LIST,
-    payload:error
+    payload: error
 })
-
-export const requestLoadRatingList = () => dispatch => {
+const categoryEnum = {
+    'sorting': "Garbage sorting",
+    'waste': "Paper waste sale",
+    'tech': "Resource saving tech",
+    'flora': "Plant a piece of flora",
+    'land': "Clean a patch of land",
+    'any': 'any'
+}
+export const requestLoadRatingList = (categoryFilter) => (dispatch, getState) => {
     dispatch(startLoadRatingList())
-    axios.get(`https://eco-project-back-end.herokuapp.com/rating`)
-        .then(res=>res.data)
-        .then(data=>dispatch(successLoadRatingList(data)))
-        .catch(error=>dispatch(failureLoadRatingList(error)))
+    axios.get(
+        `https://eco-project-back-end.herokuapp.com/rating?category=${categoryEnum[categoryFilter]}`,
+        {headers: {email: getState().auth.userObject.email}})
+        .then(res => {
+            console.log('res',res.headers['user'])
+            dispatch(successLoadRatingList(res.data))
+            dispatch(showMeInList(res))
+        })
+        .catch(error => dispatch(failureLoadRatingList(error)))
 }
 
 
 export const setRatingSortBy = option => ({
-    type:RatingTypes.SET_RATING_FILTER,
-    payload:option
+    type: RatingTypes.SET_RATING_FILTER,
+    payload: option
 })

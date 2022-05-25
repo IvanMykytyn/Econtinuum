@@ -18,7 +18,7 @@ const RatingList = ({ratingList, sortBy, isTopInTheActivity}) => {
     ratingList = ratingList.filter(item => item.favorite !== 'none')
 
     return (
-        ratingList.map((user, index) => <RatingItem key={index} {...user} />)
+        ratingList.map((user, index) => <RatingItem key={index} place={index+1}{...user} />)
     )
 }
 

@@ -12,12 +12,12 @@ const initialFilter = {
   quantity: "count_of_tasks",
 };
 
-const Dashboard = ({ loadRating, setRatingSortBy, sortBy }) => {
+const Dashboard = ({ loadRating, setRatingSortBy, sortBy,categoryFilter,isFetching }) => {
   const [isTopInTheActivity, setIsTopInTheActivity] = useState(false);
 
   useEffect(() => {
-    loadRating();
-  }, [loadRating]);
+    loadRating(categoryFilter);
+  }, [loadRating,categoryFilter]);
 
   return (
     <div className="dashboard">
@@ -51,20 +51,21 @@ const Dashboard = ({ loadRating, setRatingSortBy, sortBy }) => {
           <p>Tasks done</p>
           <p>Favorite</p>
         </div>
-        <RatingList isTopInTheActivity={isTopInTheActivity} />
+        <RatingList isTopInTheActivity={isTopInTheActivity} isLoading={isFetching} />
       </div>
     </div>
   );
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loadRating: () => dispatch(requestLoadRatingList()),
+  loadRating: (categoryFilter) => dispatch(requestLoadRatingList(categoryFilter)),
   setRatingSortBy: (option) => dispatch(setRatingSortBy(option)),
 });
 
 const mapStateToProps = (state) => ({
   isFetching: state.rating.isFetching,
   sortBy: state.rating.sortBy,
+  categoryFilter: state.filter.category
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
