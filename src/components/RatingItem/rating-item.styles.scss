@@ -1,0 +1,50 @@
+.task-item {
+  display: flex;
+  justify-content: space-between;
+
+  background-color: rgba(196, 196, 196, 0.25);
+
+  padding: 25px 15px 25px 50px;
+  border-radius: 18px;
+
+  font-family: "Gilroy", sans-serif;
+  font-style: normal;
+
+  .task-data {
+    min-width: 50px;
+    text-align: center;
+  }
+  .task-points p {
+    min-width: 50px;
+
+    font-weight: 400;
+    font-size: 21px;
+    margin-right: 40px;
+  }
+  .task-id p {
+    font-weight: 600;
+    font-size: 21px;
+    text-align: center;
+    margin-left: 20px;
+  }
+  .task-full-name p {
+    font-weight: 400;
+    font-size: 22px;
+    min-width: 150px;
+  }
+  .task-status {
+    min-width: 60px;
+    text-align: left;
+  }
+  .category {
+    min-width: 100px;
+    text-align: center;
+    border-radius: 12px;
+
+    padding: 3px 0;
+    p {
+      font-weight: 600;
+      font-size: 21px;
+    }
+  }
+}

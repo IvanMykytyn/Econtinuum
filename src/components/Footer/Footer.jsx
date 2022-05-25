@@ -7,36 +7,39 @@ import Logo from "../_common/Logo/Logo";
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="logo-box">
-          <Logo/>
-      </div>
-      <div className="contacts-box">
-        <h4>Contacts</h4>
-        <ul>
-          <li>Econtinuum@gmail.com</li>
-          <li>+380 123 456 789</li>
-          <li>+380 341 599 124</li>
-        </ul>
-      </div>
-      <div className="social-box">
-        <h4>Social</h4>
-        <ul>
-          <li>
-            <BsYoutube size={30} />
-          </li>
-          <li>
-            <FaFacebookF size={25} />
-          </li>
-          <li>
-            <BsTwitter size={25} />
-          </li>
-          <li>
-            <BsInstagram size={25} />
-          </li>
-        </ul>
-      </div>
-      <div className="copyright-box">
-        <p>© 2022 Econtinuum</p>
+      <div className="footer-box">
+        <div className="social-box">
+          <div className="inner-contacts-box">
+            <h4>Socialize</h4>
+            <ul>
+              <li>
+                <BsYoutube size={30} />
+              </li>
+              <li>
+                <FaFacebookF size={25} />
+              </li>
+              <li>
+                <BsTwitter size={25} />
+              </li>
+              <li>
+                <BsInstagram size={25} />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="contacts-box">
+          <h4>Contact us</h4>
+          <ul>
+            <li>econtinuum@gmail.com</li>
+            <li>+380 334 342 437</li>
+          </ul>
+        </div>
+        <div className="logo-box">
+          <Logo />
+        </div>
+        <div className="copyright-box">
+          <p>© 2022 Econtinuum</p>
+        </div>
       </div>
     </footer>
   );

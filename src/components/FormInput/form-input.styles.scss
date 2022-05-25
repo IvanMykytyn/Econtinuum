@@ -1,4 +1,3 @@
-
 .form-input-container {
   width: 100%;
 
@@ -8,17 +7,20 @@
 
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 18px;
 
     padding: 14px 11px;
     margin-bottom: 10px;
-    border: 1px solid #E5E5E5;
+    border: 1px solid #e5e5e5;
     box-sizing: border-box;
     border-radius: 7px;
-
   }
-
+  p {
+    margin: 0 0 5px 3px;
+    font-weight: 400;
+    font-size: 18px;
+  }
   .help-block {
     display: block;
     color: red;
