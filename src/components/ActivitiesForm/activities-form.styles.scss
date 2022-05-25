@@ -15,7 +15,6 @@ $formTextColor: #8f8c9c;
   left: 0;
 
   //   opacity: 0.65;
-
 }
 
 
@@ -72,7 +71,6 @@ $formTextColor: #8f8c9c;
   hr {
     color: white;
 
-
     width: 20%;
     margin-bottom: 30px;
   }
@@ -107,7 +105,6 @@ $formTextColor: #8f8c9c;
     align-items: center;
     min-height: 60px;
     gap: 20px;
-
   }
 
   p,
@@ -125,6 +122,17 @@ $formTextColor: #8f8c9c;
     img {
       margin: 0 (30px - (38px / 2));
     }
+    .location__text {
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 33px;
+
+      color: #8f8c9c;
+      &:hover {
+        color: black;
+        transition-duration: 0.3s;
+      }
+    }
   }
 
   .photos {
@@ -137,19 +145,17 @@ $formTextColor: #8f8c9c;
       input[type="file"] {
         display: none;
       }
-      .photo__text{
+      .photo__text {
         cursor: pointer;
-        font-size: 27.9004px;
+        font-size: 28px;
         line-height: 33px;
 
-        color: #8F8C9C;
+        color: #8f8c9c;
+        &:hover {
+          color: black;
+          transition-duration: 0.3s;
+        }
       }
-
-      &:hover {
-        color: black;
-        transition-duration: 0.3s;
-      }
-
     }
   }
 
@@ -199,6 +205,10 @@ $formTextColor: #8f8c9c;
       font-size: 32px;
 
       line-height: 39px;
+
+      &:hover {
+        opacity: 80%;
+      }
     }
   }
 }
