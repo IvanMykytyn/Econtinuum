@@ -8,14 +8,18 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import {
   authFailureReset,
   userSignUpRequest,
+  userSignRequestViaGoogle,
 } from "../../redux/auth/auth.actions";
 import { connect } from "react-redux";
 import { validateInput } from "../../utils/SignUp/validateInput";
 import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
 import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
+import axios from "axios";
+import { GoogleLogin } from "react-google-login";
 
 const SignUp = ({
   signUpRequest,
+  signRequestViaGoogle,
   resetErrorMessage,
   auth: { isLoading, errorMessage },
 }) => {
@@ -50,6 +54,40 @@ const SignUp = ({
     setErrors({ ...errors, [name]: "" });
   };
 
+  const handleOAuth = async (googleData) => {
+    try {
+      const result = await signRequestViaGoogle(googleData);
+      if (result) {
+        setErrors({});
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isValid = () => {
+    const { errors, isValid } = validateInput(user);
+    if (!isValid) {
+      setErrors(errors);
+    }
+    return isValid;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (isValid()) {
+      const send_user = {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        date_of_birth: `${user.year}-${user.month}-${user.day}`,
+        email: user.email,
+        password: user.password.toString(),
+      };
+
+      const result = await signUpRequest(send_user);
+
   const isValid = () => {
     const { errors, isValid } = validateInput(user);
     if (!isValid) {
@@ -70,6 +108,7 @@ const SignUp = ({
         password: user.password.toString(),
       };
       const result = await signUpRequest(send_user);
+
 
       if (result) {
         setUser({
@@ -92,7 +131,6 @@ const SignUp = ({
       <div className="signup">
         <TitleFormField>Sign Up</TitleFormField>
         <SubtitleFormField>Create your own story</SubtitleFormField>
-
         <form className="signup-form" onSubmit={handleSubmit}>
           <div className="signup-form__flex">
             <FormInput
@@ -148,7 +186,7 @@ const SignUp = ({
               onChange={handleChange}
               label={"Year"}
               error={errors.year}
-              min={1960}
+              min={1950}
               max={new Date().getFullYear()}
             />
           </div>
@@ -173,11 +211,24 @@ const SignUp = ({
               Sign up
             </CustomButton>
             <div className="signup-form__text">or</div>
-            <CustomButton googleButton>Sign up with Google</CustomButton>
+            <GoogleLogin
+              clientId={process.env.GOOGLE_CLIENT_ID}
+              render={(renderProps) => (
+                <CustomButton
+                  googleButton
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  Sign up with Google
+                </CustomButton>
+              )}
+              onSuccess={handleOAuth}
+              onFailure={handleOAuth}
+            />
           </div>
         </form>
         <p className="signup__description">
-          Already have an account?{" "}
+          Already have an account?
           <Link className="signup__link" to={"/sign-in"}>
             Sign in
           </Link>
@@ -189,8 +240,10 @@ const SignUp = ({
 
 const mapDispatchToProps = (dispatch) => ({
   signUpRequest: (user) => dispatch(userSignUpRequest(user)),
+  signRequestViaGoogle: (user) => dispatch(userSignRequestViaGoogle(user)),
   resetErrorMessage: () => dispatch(authFailureReset()),
 });
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
