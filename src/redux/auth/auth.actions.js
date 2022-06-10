@@ -94,7 +94,13 @@ export const userLogout = () => ({
   type: AuthActionTypes.USER_AUTH_LOGOUT,
 });
 
-export const userLogoutRequest = () => (dispatch) => {
-  dispatch(userLogout());
-  localStorage.removeItem("user");
-};
+
+export const userLogoutRequest = () => dispatch => {
+    dispatch(userLogout())
+    localStorage.removeItem('user')
+}
+
+export const setCurrentUser = (user) => ({
+    type:AuthActionTypes.SET_CURRENT_USER,
+    payload:user
+})

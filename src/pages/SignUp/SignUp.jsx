@@ -88,6 +88,28 @@ const SignUp = ({
 
       const result = await signUpRequest(send_user);
 
+  const isValid = () => {
+    const { errors, isValid } = validateInput(user);
+    if (!isValid) {
+      setErrors(errors);
+    }
+    return isValid;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (isValid()) {
+      const send_user = {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        date_of_birth: `${user.year}-${user.month}-${user.day}`,
+        email: user.email,
+        password: user.password.toString(),
+      };
+      const result = await signUpRequest(send_user);
+
+
       if (result) {
         setUser({
           first_name: "",
@@ -109,7 +131,6 @@ const SignUp = ({
       <div className="signup">
         <TitleFormField>Sign Up</TitleFormField>
         <SubtitleFormField>Create your own story</SubtitleFormField>
-
         <form className="signup-form" onSubmit={handleSubmit}>
           <div className="signup-form__flex">
             <FormInput

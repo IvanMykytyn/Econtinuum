@@ -1,0 +1,105 @@
+$bgColor: #f1ffe5;
+$separateHrColor: #556748;
+$taskBgColor: #d9ebcc;
+$additionalInfoBgColor: #c3d7a8;
+
+.categories-main-box {
+  min-height: 100vh;
+  padding-top: 60px;
+  background-color: $bgColor;
+  position: relative;
+
+  .title-box {
+    height: 100vh;
+    background: url("images/title-bg.png") 0 0 / 100% 100% no-repeat;
+
+    div {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+
+      h1 {
+        font-weight: 800;
+        font-size: 150px;
+        text-transform: uppercase;
+      }
+      p {
+        font-weight: 500;
+        font-size: 36px;
+      }
+    }
+    @media (max-width: 1200px) {
+      height: 350px;
+      div {
+        h1 {
+          font-size: 64px;
+        }
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .dots {
+    margin: 60px 45%;
+
+    hr {
+      color: $separateHrColor;
+      border: none;
+      border-top: 16px dotted;
+    }
+  }
+
+  .line-box {
+    margin: 60px 35%;
+
+    hr {
+      background-color: $separateHrColor;
+      border: none;
+      border-radius: 10px;
+      height: 8px;
+    }
+  }
+}
+.categories-main-box {
+  .additional-info {
+    background-color: $additionalInfoBgColor;
+
+    padding: 50px 300px 150px 120px;
+    border-radius: 50px 50px 0 0;
+
+    display: flex;
+    img {
+      margin-right: 55px;
+    }
+
+    .text-info {
+      margin: 40px 0;
+
+      h1 {
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 87px;
+
+        margin-bottom: 10px;
+      }
+      h1 ~ h1 {
+        margin-top: 50px;
+      }
+      p {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 27px;
+        width: 80%;
+      }
+      .tutorial-link {
+        color: black;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+    }
+  }
+}

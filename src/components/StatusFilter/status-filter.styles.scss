@@ -1,0 +1,74 @@
+.status-section {
+  .status-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    cursor: pointer;
+
+    padding: 10px 25px;
+
+    &:hover {
+      color: #6eb29a;
+      background-color: #dedede;
+
+      border-radius: 18px;
+    }
+    h4 {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 22px;
+    }
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  .status-list {
+    p {
+      font-family: "Gilroy", sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 21px;
+      color: #41484e;
+    }
+  }
+}
+
+.status-list {
+  margin-left: 25px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 6px 20px;
+
+    animation: list_animation 0.5s forwards;
+  }
+
+  .active-category {
+    background-color: #dedede;
+
+    border-radius: 18px;
+  }
+}
+#status-any {
+  opacity: 0;
+  animation-delay: 0s;
+}
+#status-success {
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+#status-failed {
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+#status-validating {
+  opacity: 0;
+  animation-delay: 0.6s;
+}

@@ -1,0 +1,39 @@
+$taskBgColor: #d9ebcc;
+
+
+.tasks-box {
+  background-color: $taskBgColor;
+
+  margin: 25px;
+  padding: 70px 50px;
+  border-radius: 50px;
+
+  // font
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.04em;
+
+  display: grid;
+  grid-template-areas:
+    "a a b b c c"
+    "a a b b d e";
+  gap: 32px;
+
+  div {
+    padding: 15px;
+    border-radius: 25px;
+    letter-spacing: -0.04em;
+
+    cursor: pointer;
+
+    .task-description {
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 25px;
+    }
+    span {
+      font-weight: 500;
+    }
+  }
+
+}

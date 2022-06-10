@@ -1,0 +1,114 @@
+.task-history {
+  margin-top: 65px;
+  background-color: #f2f2f2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  border-radius: 20px;
+  padding: 36px 75px 50px;
+  margin-bottom: 500px;
+
+  font-family: "Gilroy", sans-serif;
+  font-style: normal;
+  text-align: center;
+  h1 {
+    font-weight: 700;
+    font-size: 36px;
+  }
+}
+
+.task-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .table-header {
+    // display: flex;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    margin: 5px 10px 5px 50px;
+    p {
+      font-weight: 600;
+      font-size: 25px;
+      color: #555461;
+    }
+
+    p.table-header-id {
+      text-align: left;
+    }
+    p.table-header-points {
+      text-align: left;
+      margin-left: 15px;
+    }
+    p.table-header-status {
+      // text-align: right;
+      margin-left: 15px;
+    }
+    p.table-header-category {
+      text-align: right;
+    }
+  }
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(196, 196, 196, 0.25);
+
+    padding: 25px 15px 25px 50px;
+    border-radius: 18px;
+
+    .task-data {
+      min-width: 50px;
+      text-align: center;
+    }
+    .task-points p {
+      min-width: 80px;
+      font-family: "Gilroy", sans-serif;
+      font-style: normal;
+
+      font-weight: 400;
+      font-size: 21.5px;
+      margin-right: 40px;
+    }
+    .task-id p {
+      font-family: "Gilroy", sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 21px;
+      text-align: left;
+      margin-left: 5px;
+    }
+    .category {
+      min-width: 100px;
+      text-align: center;
+      border-radius: 12px;
+
+      padding: 3px 0;
+      p {
+        font-family: "Gilroy", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 21px;
+      }
+    }
+  }
+}
+
+.flora {
+  background-color: #a2b38e;
+}
+.land {
+  background-color: #e4e9c1;
+}
+.sorting {
+  background-color: #639d9a;
+}
+.tech {
+  background-color: #e8c083;
+}
+.waste {
+  background-color: #9fc08c;
+}
