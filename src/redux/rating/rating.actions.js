@@ -29,7 +29,10 @@ export const requestLoadRatingList =
     dispatch(startLoadRatingList())
     axios
       .get(
-        `https://eco-project-back-end.herokuapp.com/rating?category=${categoryEnum[categoryFilter]}`
+        `https://eco-project-back-end.herokuapp.com/rating?category=${categoryEnum[categoryFilter]}`,
+        {
+          headers: { authorization: getState().auth.userObject.token },
+        }
       )
       .then((res) => {
         dispatch(successLoadRatingList(res.data))
