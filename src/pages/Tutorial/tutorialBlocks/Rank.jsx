@@ -9,9 +9,9 @@ const Rank = ({ count }) => {
       <div className="stars">
         {[1, 2, 3, 4, 5].map((star) => {
           if (star <= count) {
-            return <AiFillStar size={30} color="#F7BA46" />;
+            return <AiFillStar size={30} color="#F7BA46" key={star}/>;
           } else {
-            return <AiOutlineStar size={30} />;
+            return <AiOutlineStar size={30} key={star}/>;
           }
         })}
       </div>

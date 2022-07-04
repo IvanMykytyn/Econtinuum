@@ -1,65 +1,81 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-import { Link, useNavigate } from "react-router-dom";
-import "./sign-up.styles.scss";
-import FormInput from "../../components/FormInput/FormInput";
-import Password from "../../components/Password/Password";
-import CustomButton from "../../components/CustomButton/CustomButton";
+import { Link, useNavigate } from 'react-router-dom'
+import './sign-up.styles.scss'
+import FormInput from '../../components/FormInput/FormInput'
+import Password from '../../components/Password/Password'
+import CustomButton from '../../components/CustomButton/CustomButton'
 import {
   authFailureReset,
   userSignUpRequest,
-} from "../../redux/auth/auth.actions";
-import { connect } from "react-redux";
-import { validateInput } from "../../utils/SignUp/validateInput";
-import TitleFormField from "../../components/_common/TitleFormField/TitleFormField";
-import SubtitleFormField from "../../components/_common/SubtitleFormField/SubtitleFormField";
+  userSignRequestViaGoogle,
+} from '../../redux/auth/auth.actions'
+import { connect } from 'react-redux'
+import { validateInput } from '../../utils/SignUp/validateInput'
+import TitleFormField from '../../components/_common/TitleFormField/TitleFormField'
+import SubtitleFormField from '../../components/_common/SubtitleFormField/SubtitleFormField'
+import { GoogleLogin } from 'react-google-login'
 
 const SignUp = ({
   signUpRequest,
   resetErrorMessage,
+  signRequestViaGoogle,
+
   auth: { isLoading, errorMessage },
 }) => {
   useEffect(
     () => () => {
       if (errorMessage) {
-        resetErrorMessage();
+        resetErrorMessage()
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
     []
-  );
-  const navigate = useNavigate();
+  )
+  const navigate = useNavigate()
   const [user, setUser] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    day: "",
-    month: "",
-    year: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [errors, setErrors] = useState({});
+    first_name: '',
+    last_name: '',
+    email: '',
+    day: '',
+    month: '',
+    year: '',
+    password: '',
+    confirmPassword: '',
+  })
+  const [errors, setErrors] = useState({})
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
-    if (name === "email") {
-      resetErrorMessage();
+    const { name, value } = event.target
+    setUser({ ...user, [name]: value })
+    if (name === 'email') {
+      resetErrorMessage()
     }
-    setErrors({ ...errors, [name]: "" });
-  };
+    setErrors({ ...errors, [name]: '' })
+  }
 
   const isValid = () => {
-    const { errors, isValid } = validateInput(user);
+    const { errors, isValid } = validateInput(user)
     if (!isValid) {
-      setErrors(errors);
+      setErrors(errors)
     }
-    return isValid;
-  };
+    return isValid
+  }
+
+  const handleOAuth = async (googleData) => {
+    try {
+      const result = await signRequestViaGoogle(googleData)
+      if (result) {
+        setErrors({})
+        navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (isValid()) {
       const send_user = {
@@ -68,25 +84,25 @@ const SignUp = ({
         date_of_birth: `${user.year}-${user.month}-${user.day}`,
         email: user.email,
         password: user.password.toString(),
-      };
-      const result = await signUpRequest(send_user);
+      }
+      const result = await signUpRequest(send_user)
 
       if (result) {
         setUser({
-          first_name: "",
-          last_name: "",
-          email: "",
-          day: "",
-          month: "",
-          year: "",
-          password: "",
-          confirmPassword: "",
-        });
-        setErrors({});
-        navigate("/");
+          first_name: '',
+          last_name: '',
+          email: '',
+          day: '',
+          month: '',
+          year: '',
+          password: '',
+          confirmPassword: '',
+        })
+        setErrors({})
+        navigate('/')
       }
     }
-  };
+  }
   return (
     <div className="signup-container">
       <div className="signup">
@@ -97,56 +113,56 @@ const SignUp = ({
           <div className="signup-form__flex">
             <FormInput
               type="text"
-              name={"first_name"}
+              name={'first_name'}
               value={user.first_name}
               onChange={handleChange}
-              label={"First name"}
+              label={'First name'}
               error={errors.first_name}
             />
             <FormInput
               type="text"
-              name={"last_name"}
+              name={'last_name'}
               value={user.last_name}
               onChange={handleChange}
-              label={"Last name"}
+              label={'Last name'}
               error={errors.last_name}
             />
           </div>
           <FormInput
             type="text"
-            name={"email"}
+            name={'email'}
             value={user.email}
             onChange={handleChange}
-            label={"Email address"}
+            label={'Email address'}
             error={errors.email ? errors.email : errorMessage}
           />
           <div className="signup-form__flex">
             <FormInput
               type="number"
-              name={"day"}
+              name={'day'}
               value={user.day}
               onChange={handleChange}
-              label={"Day"}
+              label={'Day'}
               error={errors.day}
               min={1}
               max={31}
             />
             <FormInput
               type="number"
-              name={"month"}
+              name={'month'}
               value={user.month}
               onChange={handleChange}
-              label={"Month"}
+              label={'Month'}
               error={errors.month}
               min={1}
               max={12}
             />
             <FormInput
               type="number"
-              name={"year"}
+              name={'year'}
               value={user.year}
               onChange={handleChange}
-              label={"Year"}
+              label={'Year'}
               error={errors.year}
               min={1960}
               max={new Date().getFullYear()}
@@ -154,45 +170,59 @@ const SignUp = ({
           </div>
           <div className="signup-form__flex">
             <Password
-              name={"password"}
+              name={'password'}
               value={user.password}
               onChange={handleChange}
-              label={"Password"}
+              label={'Password'}
               error={errors.password}
             />
             <Password
-              name={"confirmPassword"}
+              name={'confirmPassword'}
               value={user.confirmPassword}
               onChange={handleChange}
-              label={"Repeat password"}
+              label={'Repeat password'}
               error={errors.confirmPassword}
             />
           </div>
-          <div className={"signup-form__buttons signup-form__flex"}>
+          <div className={'signup-form__buttons signup-form__flex'}>
             <CustomButton disabled={isLoading} type="submit">
               Sign up
             </CustomButton>
             <div className="signup-form__text">or</div>
-            <CustomButton googleButton>Sign up with Google</CustomButton>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              render={(renderProps) => (
+                <CustomButton
+                  googleButton
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  Sign up with Google
+                </CustomButton>
+              )}
+              onSuccess={handleOAuth}
+              onFailure={handleOAuth}
+            />
           </div>
         </form>
         <p className="signup__description">
-          Already have an account?{" "}
-          <Link className="signup__link" to={"/sign-in"}>
+          Already have an account?{' '}
+          <Link className="signup__link" to={'/sign-in'}>
             Sign in
           </Link>
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const mapDispatchToProps = (dispatch) => ({
   signUpRequest: (user) => dispatch(userSignUpRequest(user)),
+  signRequestViaGoogle: (user) => dispatch(userSignRequestViaGoogle(user)),
   resetErrorMessage: () => dispatch(authFailureReset()),
-});
+})
 const mapStateToProps = (state) => ({
   auth: state.auth,
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
