@@ -17,7 +17,7 @@ const Dashboard = ({ loadRating, setRatingSortBy, sortBy,categoryFilter,isFetchi
 
   useEffect(() => {
     loadRating(categoryFilter);
-  }, [loadRating,categoryFilter]);
+  }, [loadRating, categoryFilter]);
 
   return (
     <div className="dashboard">

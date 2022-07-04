@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import {connect} from "react-redux"
+import {showMeInList} from "../../redux/rating/rating.actions"
 
 import './rating.styles.scss'
 import '../Profile/profile.styles.scss'
@@ -9,9 +11,8 @@ import { BsDot } from 'react-icons/bs'
 import Dashboard from '../../components/Dashboard/Dashboard'
 import CategoryFilter from '../../components/CategoryFilter/CategoryFilter'
 
-const Rating = () => {
-  const [showMe, setShowMe] = useState(false)
-
+const Rating = ({showMe, setShowMe}) => {
+  
   return (
     <div className="rating-content">
       <nav>
@@ -46,4 +47,12 @@ const Rating = () => {
   )
 }
 
-export default Rating
+const mapStateToProps = (state) => ({
+  showMe: state.rating.showMe
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setShowMe: (showMe) => dispatch(showMeInList(showMe))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Rating)

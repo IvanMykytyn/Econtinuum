@@ -6,7 +6,7 @@ import WithSpinner from "../withSpinner/withSpinner";
 
 
 
-const RatingList = ({ratingList, sortBy, isTopInTheActivity}) => {
+const RatingList = ({ratingList, sortBy, isTopInTheActivity, userId}) => {
     const compareItem = (a, b) => b[sortBy] - a[sortBy]
     if (isTopInTheActivity) {
         ratingList.sort(compareItem)
@@ -18,14 +18,15 @@ const RatingList = ({ratingList, sortBy, isTopInTheActivity}) => {
     ratingList = ratingList.filter(item => item.favorite !== 'none')
 
     return (
-        ratingList.map((user, index) => <RatingItem key={index} place={index+1}{...user} />)
+        ratingList.map((user, index) => <RatingItem key={index} place={index+1}{...user} userId={userId} />)
     )
 }
 
 
 const mapStateToProps = state => ({
     ratingList: state.rating.ratingList,
-    sortBy: state.rating.sortBy
+    sortBy: state.rating.sortBy,
+    userId: state.auth.userObject?._id, 
 })
 
 export default connect(mapStateToProps)(WithSpinner(RatingList));

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     ratingList: [],
     errorMessage: null,
     sortBy:'points',
-    showMe:null
+    showMe: false
 }
 
 export const ratingReducer = (state = INITIAL_STATE, action) => {
