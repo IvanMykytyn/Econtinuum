@@ -25,14 +25,11 @@ const categoryEnum = {
   any: 'any',
 }
 export const requestLoadRatingList =
-  (categoryFilter) => (dispatch, getState) => {
+  (categoryFilter) => (dispatch) => {
     dispatch(startLoadRatingList())
     axios
       .get(
-        `https://eco-project-back-end.herokuapp.com/rating?category=${categoryEnum[categoryFilter]}`,
-        {
-          headers: { authorization: getState().auth.userObject.token },
-        }
+        `https://eco-project-back-end.herokuapp.com/rating?category=${categoryEnum[categoryFilter]}`
       )
       .then((res) => {
         dispatch(successLoadRatingList(res.data))
