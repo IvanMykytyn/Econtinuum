@@ -1,0 +1,74 @@
+
+  $bgAndArrowColor: #6eb29a;
+  $greyDark: #2d4848;
+  .pagination-container {
+    font-size: 62.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $greyDark;
+    ul {
+      list-style-type: none;
+    }
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    margin: 3rem;
+    border-radius: 0.75rem;
+    background: rgba(196, 196, 196, 0.25);
+    box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
+  
+    &__numbers,
+    &__btn,
+    &__dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  
+    &__dots {
+      width: 2.6rem;
+      height: 2.6rem;
+      color: $bgAndArrowColor;
+      cursor: initial;
+    }
+  
+    &__numbers {
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 0.4rem;
+  
+      &:hover {
+        color: $bgAndArrowColor;
+      }
+  
+      &.active {
+        color: #ffffff;
+        background: $bgAndArrowColor;
+        font-weight: 600;
+        border: 1px solid $bgAndArrowColor;
+      }
+    }
+  
+    &__btn {
+      color: $bgAndArrowColor;
+      padding:0 1rem;
+  
+      &.active {
+        color: $greyDark;
+  
+        &:hover {
+          color: $bgAndArrowColor;
+        }
+      }
+    }
+  }
+  
