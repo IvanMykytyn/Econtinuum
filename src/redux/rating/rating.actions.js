@@ -33,7 +33,6 @@ export const requestLoadRatingList =
       )
       .then((res) => {
         dispatch(successLoadRatingList(res.data))
-        dispatch(showMeInList(res))
       })
       .catch((error) => dispatch(failureLoadRatingList(error)))
   }

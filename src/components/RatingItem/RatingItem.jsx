@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux"
 
 import "./rating-item.styles.scss";
 
@@ -10,8 +11,10 @@ const categoryEnum = {
   "Clean a patch of land": "Land",
 };
 
-const RatingItem = ({ place, full_name, points, count_of_tasks, favorite }) => (
-  <div className="task-item">
+const RatingItem = ({ _id, place, full_name, points, count_of_tasks, favorite, userId,showMe }) =>
+{
+  return (
+  <div className={((showMe && _id === userId) ? "task-item task-item-this-user" : "task-item" )} >
     <div className="task-data dashboard-task-id">
       <p>{place}</p>
     </div>
@@ -28,6 +31,9 @@ const RatingItem = ({ place, full_name, points, count_of_tasks, favorite }) => (
       <p>{categoryEnum[favorite]}</p>
     </div>
   </div>
-);
+)};
 
-export default RatingItem;
+const mapStateToProps = (state) => ({
+  showMe: state.rating.showMe
+})
+export default connect(mapStateToProps)(RatingItem);
