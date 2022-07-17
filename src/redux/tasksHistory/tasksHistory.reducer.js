@@ -1,33 +1,41 @@
-import {TaskHistoryTypes} from "./tasksHistory.types";
+import { TaskHistoryTypes } from './tasksHistory.types'
 
 const INITIAL_STATE = {
-    isFetching: false,
-    tasks: [],
-    errorMessage: null,
+  isFetching: false,
+  tasks: [],
+  totalTasks: 0,
+  errorMessage: null,
+  page: 1,
 }
 
 export const tasksHistoryReducer = (state = INITIAL_STATE, action) => {
-    switch (action.type) {
-        case TaskHistoryTypes.START_LOAD_TASKS_REQUEST:
-            return {
-                ...state,
-                isFetching: true
-            }
-        case TaskHistoryTypes.SUCCESS_LOAD_TASKS_REQUEST:
-            return {
-                ...state,
-                isFetching: false,
-                tasks: action.payload,
-                errorMessage: null
-            }
-        case TaskHistoryTypes.FAILURE_LOAD_TASKS_REQUEST:
-            return {
-                ...state,
-                isFetching: false,
-                errorMessage: action.payload
-            }
+  switch (action.type) {
+    case TaskHistoryTypes.START_LOAD_TASKS_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      }
+    case TaskHistoryTypes.SUCCESS_LOAD_TASKS_REQUEST:
+      return {
+        ...state,
+        isFetching: false,
+        tasks: action.payload.tasks,
+        totalTasks: action.payload.totalTasks,
+        errorMessage: null,
+      }
+    case TaskHistoryTypes.FAILURE_LOAD_TASKS_REQUEST:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload,
+      }
 
-        default:
-            return state
-    }
+    case TaskHistoryTypes.CHANGE_PAGE:
+      return {
+        ...state,
+        page: action.payload,
+      }
+    default:
+      return state
+  }
 }

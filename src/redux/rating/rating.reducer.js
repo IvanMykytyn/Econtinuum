@@ -3,9 +3,12 @@ import {RatingTypes} from "./rating.types";
 const INITIAL_STATE = {
     isFetching: false,
     ratingList: [],
+    totalTasks: 0,
     errorMessage: null,
     sortBy:'points',
-    showMe:null
+    showMe: false,
+    page: 1,
+
 }
 
 export const ratingReducer = (state = INITIAL_STATE, action) => {
@@ -19,7 +22,8 @@ export const ratingReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                ratingList: action.payload,
+                ratingList: action.payload.userRating,
+                totalTasks: action.payload.totalTasks,
                 errorMessage: null
             }
         case RatingTypes.FAILURE_LOAD_LIST:
@@ -37,6 +41,11 @@ export const ratingReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 showMe:action.payload
+            }
+        case RatingTypes.CHANGE_PAGE:
+            return {
+                ...state,
+                page: action.payload,
             }
         default:
             return state
