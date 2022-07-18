@@ -8,18 +8,15 @@ import CustomButton from '../../components/CustomButton/CustomButton'
 import {
   authFailureReset,
   userSignUpRequest,
-  userSignRequestViaGoogle,
 } from '../../redux/auth/auth.actions'
 import { connect } from 'react-redux'
 import { validateInput } from '../../utils/SignUp/validateInput'
 import TitleFormField from '../../components/_common/TitleFormField/TitleFormField'
 import SubtitleFormField from '../../components/_common/SubtitleFormField/SubtitleFormField'
-import { GoogleLogin } from 'react-google-login'
 
 const SignUp = ({
   signUpRequest,
   resetErrorMessage,
-  signRequestViaGoogle,
 
   auth: { isLoading, errorMessage },
 }) => {
@@ -60,18 +57,6 @@ const SignUp = ({
       setErrors(errors)
     }
     return isValid
-  }
-
-  const handleOAuth = async (googleData) => {
-    try {
-      const result = await signRequestViaGoogle(googleData)
-      if (result) {
-        setErrors({})
-        navigate('/')
-      }
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   const handleSubmit = async (event) => {
@@ -188,21 +173,7 @@ const SignUp = ({
             <CustomButton disabled={isLoading} type="submit">
               Sign up
             </CustomButton>
-            <div className="signup-form__text">or</div>
-            <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-              render={(renderProps) => (
-                <CustomButton
-                  googleButton
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  Sign up with Google
-                </CustomButton>
-              )}
-              onSuccess={handleOAuth}
-              onFailure={handleOAuth}
-            />
+            
           </div>
         </form>
         <p className="signup__description">
@@ -218,7 +189,6 @@ const SignUp = ({
 
 const mapDispatchToProps = (dispatch) => ({
   signUpRequest: (user) => dispatch(userSignUpRequest(user)),
-  signRequestViaGoogle: (user) => dispatch(userSignRequestViaGoogle(user)),
   resetErrorMessage: () => dispatch(authFailureReset()),
 })
 const mapStateToProps = (state) => ({
