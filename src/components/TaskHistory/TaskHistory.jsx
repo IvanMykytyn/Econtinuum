@@ -17,12 +17,12 @@ const TaskHistory = ({
   statusFilter,
   page,
   changePage,
+  totalTasks,
 }) => {
-  
   // go to the first page after changing the filter
-    useEffect(() => {
-      changePage(1)
-    }, [categoryFilter, statusFilter])
+  useEffect(() => {
+    changePage(1)
+  }, [categoryFilter, statusFilter])
 
   // load tasks
   useEffect(() => {
@@ -41,7 +41,7 @@ const TaskHistory = ({
         </div>
         <TaskHistoryList isLoading={isLoading} />
       </div>
-      <PaginationTaskHistory />
+      {(totalTasks > 6) && <PaginationTaskHistory />}
     </div>
   )
 }
@@ -56,5 +56,6 @@ const mapStateToProps = (state) => ({
   categoryFilter: state.filter.category,
   statusFilter: state.filter.status,
   page: state.tasksHistory.page,
+  totalTasks: state.tasksHistory.totalTasks,
 })
 export default connect(mapStateToProps, mapDispatchToProps)(TaskHistory)

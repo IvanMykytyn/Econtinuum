@@ -10,19 +10,27 @@ import {
   editUserRequest,
   tasksDoneRequest,
 } from '../../redux/editProfile/editProfile.actions'
+import { getPointsRequest } from '../../redux/auth/auth.actions'
+
 
 const EditProfile = ({
   userObject,
   editUserRequest,
   tasksDoneRequest,
   tasksDone,
+  getPointsRequest
 }) => {
+
   useEffect(() => {
     if (userObject) {
       setUser(convertJSONUserToObject(userObject))
     }
     tasksDoneRequest()
   }, [userObject])
+
+  useEffect(()=> {
+    getPointsRequest()
+  }, [tasksDone])
 
   const convertJSONUserToObject = (user) => {
     if (!user.date_of_birth) {
@@ -232,5 +240,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   editUserRequest: (user) => dispatch(editUserRequest(user)),
   tasksDoneRequest: () => dispatch(tasksDoneRequest()),
+  getPointsRequest: () => dispatch(getPointsRequest()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)
