@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 
-import "./landingPage.styles.scss";
+import './landingPage.styles.scss'
 
 // components
-import InstructionBox from "./InstructionBox";
+import InstructionBox from './InstructionBox'
 
 // icons as a component
-import { ImQuotesLeft, ImQuotesRight } from "react-icons/im";
-import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { ImQuotesLeft, ImQuotesRight } from 'react-icons/im'
+import { IoIosArrowDroprightCircle } from 'react-icons/io'
 
 // icons as an img
 import {
@@ -19,9 +19,9 @@ import {
   NumbersIcon,
   TasksIcon,
   LayersIcon,
-} from "./images";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+} from './images'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const LandingPage = ({ user }) => {
   return (
@@ -43,11 +43,11 @@ const LandingPage = ({ user }) => {
           </p>
           <div className="sign-up-now">
             {user ? (
-              <Link to={"/profile"}>go to profile</Link>
+              <Link to={'/profile'}>go to profile</Link>
             ) : (
-              <Link to={"/sign-up"}>sign up now</Link>
+              <Link to={'/sign-up'}>sign up now</Link>
             )}
-            <IoIosArrowDroprightCircle size={24} color={"#FFFFFF66"} />
+            <IoIosArrowDroprightCircle size={24} color={'#FFFFFF66'} />
           </div>
         </div>
         <div className="title-right-side">
@@ -130,9 +130,8 @@ const LandingPage = ({ user }) => {
           </div>
 
           <p>
-            Get acquainted with the steps below to get started easily and{" "}
-            <Link to="/activities">try it yourself</Link>
-            for sure.
+            Get acquainted with the steps below to get started easily and{' '}
+            <Link to="/activities">try it yourself</Link> for sure.
           </p>
         </div>
 
@@ -156,9 +155,9 @@ const LandingPage = ({ user }) => {
         </div>
       </div>
     </main>
-  );
-};
+  )
+}
 const mapStateToProps = (state) => ({
   user: state.auth.userObject,
-});
-export default connect(mapStateToProps)(LandingPage);
+})
+export default connect(mapStateToProps)(LandingPage)

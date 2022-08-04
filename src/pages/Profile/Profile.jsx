@@ -1,23 +1,18 @@
-import React from "react";
+import React from 'react'
 
+import { IoMdCheckboxOutline } from 'react-icons/io'
+import { BiLockAlt } from 'react-icons/bi'
 
-import { IoMdCheckboxOutline } from "react-icons/io";
-import { BiLockAlt } from "react-icons/bi";
-
-import "./profile.styles.scss";
-import EditProfile from "../../components/EditProfile/EditProfile";
-import TaskHistory from "../../components/TaskHistory/TaskHistory";
-import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
-import StatusFilter from "../../components/StatusFilter/StatusFilter";
+import './profile.styles.scss'
+import EditProfile from '../../components/EditProfile/EditProfile'
+import TaskHistory from '../../components/TaskHistory/TaskHistory'
+import CategoryFilter from '../../components/CategoryFilter/CategoryFilter'
+import StatusFilter from '../../components/StatusFilter/StatusFilter'
 
 // smooth scroll
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Link } from 'react-scroll'
 
 const Profile = () => {
-  const scrollToTop = () => {
-    scroll.scrollToTop();
-  };
-
   return (
     <div className="content">
       <nav>
@@ -39,7 +34,17 @@ const Profile = () => {
             </li>
             <li className="privacy-issues">
               <BiLockAlt size={24} />
-              <h3>Have privacy issues?</h3>
+              <h3>
+                <Link
+                  to="footer"
+                  spy={true}
+                  smooth={true}
+                  offset={-140}
+                  duration={1500}
+                >
+                  Have privacy issues?
+                </Link>
+              </h3>
             </li>
             <li>
               <p>Please, contact us using our social media below</p>
@@ -59,7 +64,7 @@ const Profile = () => {
         <TaskHistory />
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
