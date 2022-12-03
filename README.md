@@ -1,7 +1,7 @@
 
 # Econtinuum
 
-Project in Action - [Econtinuum](http://eco-ntinuum.herokuapp.com/)
+Project in Action - [Econtinuum](https://eco-ntinuum.netlify.app)
 
 ### Problem statement
 
