@@ -16,7 +16,7 @@ export const failureLoadActivities = (error) => ({
 
 export const requestLoadActivities = () => async dispatch => {
     dispatch(startLoadingActivities())
-    await axios.get('https://eco-project-back-end.herokuapp.com/activities')
+    await axios.get('https://eco-project-back-end.vercel.app/activities')
         .then(data => data.data)
         .then(data => dispatch(successLoadActivities([...data])))
         .catch(error => dispatch(failureLoadActivities(error)))

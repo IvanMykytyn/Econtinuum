@@ -17,7 +17,7 @@ export const failureEditUserRequest = (error) => ({
 export const editUserRequest = (data) => (dispatch) => {
   dispatch(startEditUserRequest())
   axios
-    .patch('https://eco-project-back-end.herokuapp.com/userInformation', data)
+    .patch('https://eco-project-back-end.vercel.app/userInformation', data)
     .then((res) => {
       const token = JSON.parse(localStorage.getItem('user')).token
       localStorage.setItem('user', JSON.stringify({ ...res.data, token }))
@@ -37,7 +37,7 @@ export const successTasksDoneRequest = (user) => ({
 export const tasksDoneRequest = () => (dispatch, getState) => {
   dispatch(startTasksDoneRequest())
   axios
-    .get('https://eco-project-back-end.herokuapp.com/tasks/done', {
+    .get('https://eco-project-back-end.vercel.app/tasks/done', {
       headers: { authorization: getState().auth.userObject.token },
     })
     .then((res) => {

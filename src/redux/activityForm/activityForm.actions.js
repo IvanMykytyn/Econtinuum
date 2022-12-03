@@ -29,5 +29,5 @@ export const requestActivityForm = (form) => async dispatch => {
         "Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
     }
-    await axios.post('https://eco-project-back-end.herokuapp.com/task', form, {headers}).then(() => dispatch(successRequestActivityForm())).catch(error => dispatch(failureRequestActivityForm(error)))
+    await axios.post('https://eco-project-back-end.vercel.app/task', form, {headers}).then(() => dispatch(successRequestActivityForm())).catch(error => dispatch(failureRequestActivityForm(error)))
 }

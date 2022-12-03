@@ -26,7 +26,7 @@ export const requestLoadTasks = (categoryFilter, statusFilter) => (dispatch, get
     dispatch(startLoadTasks())
     const AMOUNT = 6
     axios.get(
-        `https://eco-project-back-end.herokuapp.com/taskHistory?status=${statusFilter}&category=${categoryEnum[categoryFilter]}&page=${getState().tasksHistory.page}&amount=${AMOUNT}`,
+        `https://eco-project-back-end.vercel.app/taskHistory?status=${statusFilter}&category=${categoryEnum[categoryFilter]}&page=${getState().tasksHistory.page}&amount=${AMOUNT}`,
         {headers: {authorization: getState().auth.userObject.token}})
         .then(res => {
             dispatch(successLoadTasks(res.data.tasks, res.data.totalTasks))

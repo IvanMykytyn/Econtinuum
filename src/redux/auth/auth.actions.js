@@ -23,7 +23,7 @@ export function userSignUpRequest(userData) {
     let result = false
     dispatch(authRequestStart())
     await axios
-      .post('https://eco-project-back-end.herokuapp.com/register', userData)
+      .post('https://eco-project-back-end.vercel.app/register', userData)
       .then((data) => {
         result = true
         localStorage.setItem('user', JSON.stringify(data.data))
@@ -42,7 +42,7 @@ export function userSignInRequest(userData) {
     let result = true
     dispatch(authRequestStart())
     await axios
-      .post('https://eco-project-back-end.herokuapp.com/login', userData)
+      .post('https://eco-project-back-end.vercel.app/login', userData)
       .then((data) => {
         localStorage.setItem('user', JSON.stringify(data.data))
         dispatch(authRequestSuccess(data.data))
@@ -82,7 +82,7 @@ export const getPointsFailure = (errorObject) => ({
 export const getPointsRequest = () => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      'https://eco-project-back-end.herokuapp.com/user/points',
+      'https://eco-project-back-end.vercel.app/user/points',
       { headers: { authorization: getState().auth.userObject.token } }
     )
     dispatch(getPointsSuccess(response.data.points))

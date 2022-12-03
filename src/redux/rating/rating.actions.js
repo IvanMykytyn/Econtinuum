@@ -30,7 +30,7 @@ export const requestLoadRatingList =
     const AMOUNT = 8
     axios
       .get(
-        `https://eco-project-back-end.herokuapp.com/rating?category=${categoryEnum[categoryFilter]}&page=${getState().rating.page}&amount=${AMOUNT}&sortBy=${getState().rating.sortBy}`
+        `https://eco-project-back-end.vercel.app/rating?category=${categoryEnum[categoryFilter]}&page=${getState().rating.page}&amount=${AMOUNT}&sortBy=${getState().rating.sortBy}`
       )
       .then((res) => {
         dispatch(
